@@ -1,0 +1,70 @@
+<navigation-bar title="奖补自测" back="{{false}}" color="white" background="#17B29F" />
+<scroll-view class="container" scroll-y>
+  <view class="card">
+    <view class="page-title">你能拿多少奖补？</view>
+    <view class="page-desc">填几个基本信息，免费测算山东省各城市的中小企业数字化转型奖补金额。全程1分钟，不留手机号也能算。</view>
+    
+    <view class="input-group">
+      <label>你公司在哪个城市？</label>
+      <picker bindchange="onCityChange" mode="selector" range="{{cities}}">
+        <view class="picker-box {{form.city ? 'filled' : ''}}">
+          {{form.city || '请选择城市'}}
+        </view>
+      </picker>
+    </view>
+
+    <view class="input-group">
+      <label>公司有多少员工？</label>
+      <view class="radio-group">
+        <view 
+          wx:for="{{employeeOptions}}"
+          wx:key="value"
+          class="radio-label {{form.employee === item.value ? 'selected' : ''}}"
+          bindtap="onSelect" data-field="employee" data-value="{{item.value}}"
+        >{{item.label}}</view>
+      </view>
+    </view>
+
+    <view class="input-group">
+      <label>主要属于哪个行业？</label>
+      <view class="radio-group">
+        <view 
+          wx:for="{{industryOptions}}"
+          wx:key="value"
+          class="radio-label {{form.industry === item.value ? 'selected' : ''}}"
+          bindtap="onSelect" data-field="industry" data-value="{{item.value}}"
+        >{{item.label}}</view>
+      </view>
+    </view>
+
+    <view class="input-group">
+      <label>目前信息化到什么程度？</label>
+      <view class="radio-group">
+        <view 
+          wx:for="{{levelOptions}}"
+          wx:key="value"
+          class="radio-label {{form.level === item.value ? 'selected' : ''}}"
+          bindtap="onSelect" data-field="level" data-value="{{item.value}}"
+        >{{item.label}}</view>
+      </view>
+    </view>
+
+    <view class="input-group">
+      <label>想从哪个场景开始？</label>
+      <view class="radio-group" style="flex-wrap: wrap;">
+        <view 
+          wx:for="{{sceneOptions}}"
+          wx:key="value"
+          class="radio-label {{form.scene === item.value ? 'selected' : ''}}"
+          bindtap="onSelect" data-field="scene" data-value="{{item.value}}"
+        >{{item.label}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view style="padding: 0 0 40px 0;">
+    <button class="btn-primary" disabled="{{!canSubmit}}" bindtap="onSubmit" loading="{{submitting}}">
+      {{submitting ? '测算中...' : '立即测算奖补金额'}}
+    </button>
+  </view>
+</scroll-view>

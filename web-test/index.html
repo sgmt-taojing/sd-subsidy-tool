@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>山东数转奖补自测 — 淘景数科</title>
+<style>
+/* 淘景数科品牌风格 */
+:root { --teal: #17B29F; --green: #39D98C; --dark: #1D2129; --gray: #4E5969; --lg: #F5F8FA; --radius: 12px; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif; background: var(--lg); color: var(--dark); min-height: 100vh; }
+.header {
+  background: linear-gradient(135deg, var(--teal), var(--green));
+  color: white; padding: 48px 20px 32px; text-align: center;
+}
+.header h1 { font-size: 24px; font-weight: 600; }
+.header p { font-size: 14px; opacity: 0.85; margin-top: 8px; line-height: 1.5; }
+.container { max-width: 420px; margin: 0 auto; padding: 16px; }
+.card { background: white; border-radius: var(--radius); padding: 20px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); margin-bottom: 16px; }
+.form-group { margin-bottom: 18px; }
+.form-group label { display: block; font-size: 14px; font-weight: 500; margin-bottom: 6px; color: var(--dark); }
+.form-group select, .form-group input { width: 100%; padding: 12px; border: 1px solid #E0E0E0; border-radius: 8px; font-size: 15px; background: white; -webkit-appearance: none; }
+.options { display: flex; flex-wrap: wrap; gap: 8px; }
+.option {
+  padding: 8px 16px; border: 1px solid #E0E0E0; border-radius: 8px; font-size: 13px; cursor: pointer;
+  transition: all 0.2s; background: white;
+}
+.option.selected { border-color: var(--teal); background: rgba(23,178,159,0.06); color: var(--teal); font-weight: 500; }
+.btn {
+  display: block; width: 100%; padding: 14px 0; border: none; border-radius: var(--radius); font-size: 16px; font-weight: 600;
+  background: linear-gradient(90deg, var(--teal), var(--green)); color: white; cursor: pointer; text-align: center; transition: opacity 0.2s;
+}
+.btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.btn:active:not(:disabled) { opacity: 0.8; }
+.hidden { display: none; }
+.result-hero { background: linear-gradient(135deg, var(--teal), var(--green)); border-radius: var(--radius); padding: 32px 20px; text-align: center; color: white; margin-bottom: 16px; }
+.result-hero .label { font-size: 14px; opacity: 0.9; }
+.result-hero .amount { font-size: 56px; font-weight: 700; display: block; margin: 8px 0; }
+.result-hero .amount span { font-size: 20px; font-weight: 400; }
+.result-hero .range { font-size: 13px; opacity: 0.8; }
+.info-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #F0F0F0; }
+.info-row:last-child { border-bottom: none; }
+.section-title { font-size: 17px; font-weight: 600; margin-bottom: 12px; color: var(--dark); }
+.step-item { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid #F5F5F5; }
+.step-item:last-child { border-bottom: none; }
+.step-num {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--teal), var(--green)); color: white;
+  display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; flex-shrink: 0;
+}
+.tip-item { font-size: 14px; color: var(--gray); padding: 4px 0; }
+.footer { text-align: center; padding: 20px; font-size: 12px; color: #999; }
+.nav-bar {
+  display: flex; background: white; border-top: 1px solid #eee; position: fixed; bottom: 0; width: 100%; max-width: 420px;
+  left: 50%; transform: translateX(-50%);
+}
+.nav-item { flex: 1; text-align: center; padding: 8px 0; font-size: 11px; color: var(--gray); cursor: pointer; }
+.nav-item.active { color: var(--teal); }
+.nav-icon { font-size: 20px; display: block; margin-bottom: 2px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>你能拿多少奖补？</h1>
+  <p>填几个基本信息，免费测算山东省各城市的中小企业数字化转型奖补金额。</p>
+</div>
+
+<div class="container" id="app">
+  <!-- 自测表单 -->
+  <div id="stepForm">
+    <div class="card">
+      <div class="form-group">
+        <label>公司所在城市</label>
+        <select id="city">
+          <option value="">请选择城市</option>
+          <option value="济南">济南（最高100万）</option>
+          <option value="青岛">青岛（最高100万）</option>
+          <option value="烟台">烟台（最高80万）</option>
+          <option value="淄博">淄博（最高60万）</option>
+          <option value="济宁">济宁（最高50万）</option>
+          <option value="东营">东营（最高80万）</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>员工规模</label>
+        <div class="options" id="employeeOptions">
+          <span class="option" data-value="1-50">1-50人</span>
+          <span class="option" data-value="51-200">51-200人</span>
+          <span class="option" data-value="201-500">201-500人</span>
+          <span class="option" data-value="500+">500人以上</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>所属行业</label>
+        <div class="options" id="industryOptions">
+          <span class="option" data-value="机械制造">机械制造</span>
+          <span class="option" data-value="食品加工">食品加工</span>
+          <span class="option" data-value="化工">化工/石化</span>
+          <span class="option" data-value="电子">电子/电气</span>
+          <span class="option" data-value="纺织">纺织/服装</span>
+          <span class="option" data-value="其他">其他制造业</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>目前数字化程度</label>
+        <div class="options" id="levelOptions">
+          <span class="option" data-value="无">基本为零</span>
+          <span class="option" data-value="基础">用Excel/ERP</span>
+          <span class="option" data-value="部分">部分数字化</span>
+          <span class="option" data-value="较完善">较完善</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>想从哪个场景开始</label>
+        <div class="options" id="sceneOptions">
+          <span class="option" data-value="生产报工">生产报工</span>
+          <span class="option" data-value="设备联网">设备联网</span>
+          <span class="option" data-value="质量追溯">质量追溯</span>
+          <span class="option" data-value="全都要">以上全部</span>
+        </div>
+      </div>
+    </div>
+    <button class="btn" id="submitBtn" disabled>立即测算奖补金额</button>
+  </div>
+
+  <!-- 结果页 -->
+  <div id="stepResult" class="hidden">
+    <div class="result-hero">
+      <div class="label">你预计可申领的奖补</div>
+      <div class="amount" id="resultAmount">0<span>万元</span></div>
+      <div class="range" id="resultRange">预估范围：0 - 0万元</div>
+    </div>
+    <div class="card">
+      <div class="section-title">📋 投入估算</div>
+      <div class="info-row"><span>改造场景</span><span id="costInfo">-</span></div>
+      <div class="info-row"><span style="color:var(--teal);font-weight:600;">奖补抵后净支出</span><span id="selfPayInfo" style="color:var(--teal);font-weight:600;">-</span></div>
+      <div class="info-row"><span>所在城市</span><span id="cityInfo">-</span></div>
+    </div>
+    <div class="card" id="tipsCard" style="display:none;">
+      <div class="section-title">💡 建议</div>
+      <div id="tipsList"></div>
+    </div>
+    <div class="card">
+      <div class="section-title">📌 下一步</div>
+      <div id="nextSteps"></div>
+    </div>
+    <div class="card" style="border:1px solid var(--teal);text-align:center;">
+      <div style="font-size:16px;font-weight:600;margin-bottom:8px;">免费领《山东6市奖补政策指南》</div>
+      <div style="font-size:13px;color:var(--gray);margin-bottom:12px;">扫码添加淘景数科顾问，获取完整申报攻略</div>
+      <div style="font-size:12px;color:#999;">（联系微信：taojing-shuke → 备注"奖补"）</div>
+      <button class="btn" style="margin-top:12px;" onclick="location.href='https://www.taojingshuke.com'">访问官网咨询</button>
+    </div>
+    <button class="btn" style="margin-bottom:40px;background:linear-gradient(90deg,#999,#bbb);" onclick="resetForm()">重新测算</button>
+  </div>
+</div>
+
+<div class="nav-bar">
+  <div class="nav-item active" onclick="showForm()"><span class="nav-icon">📊</span>奖补自测</div>
+  <div class="nav-item" onclick="showAbout()"><span class="nav-icon">ℹ️</span>关于我们</div>
+</div>
+
+<div class="footer">
+  <div style="display:none" id="aboutPage">
+    <div class="card" style="text-align:center;margin-bottom:60px;">
+      <div style="font-size:28px;font-weight:700;margin-bottom:8px;">淘景数科</div>
+      <div style="font-size:14px;color:var(--gray);line-height:1.6;margin-bottom:20px;">制造业数字化转型的"小快轻准"方案提供商</div>
+      <div style="text-align:left;">
+        <div style="padding:10px 0;border-bottom:1px solid #f0f0f0;">📊 生产报工数字化 — 手机扫码报工，实时看产量</div>
+        <div style="padding:10px 0;border-bottom:1px solid #f0f0f0;">🔧 设备联网管理 — 传感器监控，故障自动预警</div>
+        <div style="padding:10px 0;border-bottom:1px solid #f0f0f0;">📋 质量追溯系统 — 原料可追溯，质检线上化</div>
+      </div>
+    </div>
+  </div>
+  © 淘景数科 2026 · 鲁ICP备XXXXXXXX号
+</div>
+
+<script>
+const RULES = {
+  '济南': { max: 100, industry: { 机械制造:1.1, 食品加工:1.0, 化工:1.0, 电子:1.15, 纺织:0.95, 其他:1.0 }, level: { 无:1.2, 基础:1.0, 部分:0.8, 较完善:0.6 } },
+  '青岛': { max: 100, industry: { 机械制造:1.0, 食品加工:0.95, 化工:1.05, 电子:1.2, 纺织:0.9, 其他:1.0 }, level: { 无:1.2, 基础:1.0, 部分:0.8, 较完善:0.6 } },
+  '烟台': { max: 80, industry: { 机械制造:1.15, 食品加工:1.0, 化工:1.2, 电子:1.0, 纺织:0.9, 其他:1.0 }, level: { 无:1.15, 基础:1.0, 部分:0.85, 较完善:0.65 } },
+  '淄博': { max: 60, industry: { 机械制造:1.0, 食品加工:0.95, 化工:1.25, 电子:1.0, 纺织:1.05, 其他:1.0 }, level: { 无:1.1, 基础:1.0, 部分:0.85, 较完善:0.7 } },
+  '济宁': { max: 50, industry: { 机械制造:1.2, 食品加工:1.1, 化工:1.0, 电子:1.0, 纺织:1.1, 其他:1.0 }, level: { 无:1.1, 基础:1.0, 部分:0.9, 较完善:0.7 } },
+  '东营': { max: 80, industry: { 机械制造:1.0, 食品加工:0.9, 化工:1.3, 电子:1.0, 纺织:0.85, 其他:1.0 }, level: { 无:1.15, 基础:1.0, 部分:0.85, 较完善:0.65 } },
+}
+const SCENE_COST = { 生产报工: 8, 设备联网: 12, 质量追溯: 10, 全都要: 25 }
+const EMP_BONUS = { '1-50': 0, '51-200': 5, '201-500': 10, '500+': 15 }
+
+let form = { city: '', employee: '', industry: '', level: '', scene: '' }
+
+function initOptions() {
+  document.querySelectorAll('.options').forEach(el => {
+    el.querySelectorAll('.option').forEach(opt => {
+      opt.addEventListener('click', () => {
+        el.querySelectorAll('.option').forEach(o => o.classList.remove('selected'))
+        opt.classList.add('selected')
+        const field = el.id.replace('Options', '')
+        form[field] = opt.dataset.value
+        checkSubmit()
+      })
+    })
+  })
+  document.getElementById('city').addEventListener('change', e => {
+    form.city = e.target.value; checkSubmit()
+  })
+}
+
+function checkSubmit() {
+  const btn = document.getElementById('submitBtn')
+  const ok = form.city && form.employee && form.industry && form.level && form.scene
+  btn.disabled = !ok
+}
+
+function calc() {
+  const rule = RULES[form.city]
+  if (!rule) return
+  const ib = rule.industry[form.industry] || 1.0
+  const lm = rule.level[form.level] || 1.0
+  const eb = EMP_BONUS[form.employee] || 0
+  const sc = SCENE_COST[form.scene] || 10
+  const est = Math.round(rule.max * ib * lm * 0.5 + eb)
+  const capped = Math.min(est, rule.max + eb)
+  const selfPay = Math.max(0, Math.round(sc * 0.5 - capped * (sc / 50)))
+
+  document.getElementById('stepForm').classList.add('hidden')
+  document.getElementById('stepResult').classList.remove('hidden')
+  document.getElementById('resultAmount').innerHTML = capped + '<span>万元</span>'
+  document.getElementById('resultRange').textContent = `预估范围：${Math.round(capped * 0.6)} - ${capped}万元`
+  document.getElementById('costInfo').textContent = sc + '万元起'
+  document.getElementById('selfPayInfo').textContent = '约' + selfPay + '万元'
+  document.getElementById('cityInfo').textContent = form.city
+
+  const tips = []
+  if (capped >= 50) tips.push('根据企业规模和政策覆盖，你属于高优先支持对象')
+  if (form.level === '无' || form.level === '基础') tips.push('数字化基础薄弱 = 改造空间大 = 奖补优先级高')
+  if (form.scene !== '全都要') tips.push('先做一个场景打出效果，后续扩展更容易')
+
+  if (tips.length) {
+    document.getElementById('tipsCard').style.display = 'block'
+    document.getElementById('tipsList').innerHTML = tips.map(t => '<div class="tip-item">• ' + t + '</div>').join('')
+  }
+
+  const steps = ['联系淘景数科获取详细申报方案', '安排免费工厂数字化诊断', '准备申报材料提交工信局']
+  document.getElementById('nextSteps').innerHTML = steps.map((s, i) =>
+    '<div class="step-item"><span class="step-num">' + (i+1) + '</span>' + s + '</div>'
+  ).join('')
+}
+
+function resetForm() {
+  document.getElementById('stepForm').classList.remove('hidden')
+  document.getElementById('stepResult').classList.add('hidden')
+  form = { city: '', employee: '', industry: '', level: '', scene: '' }
+  document.getElementById('submitBtn').disabled = true
+  document.getElementById('city').value = ''
+  document.querySelectorAll('.option').forEach(o => o.classList.remove('selected'))
+}
+
+function showForm() {
+  resetForm()
+  document.getElementById('aboutPage').style.display = 'none'
+}
+
+function showAbout() {
+  document.getElementById('stepForm').classList.add('hidden')
+  document.getElementById('stepResult').classList.add('hidden')
+  document.getElementById('aboutPage').style.display = 'block'
+}
+
+document.getElementById('submitBtn').addEventListener('click', calc)
+initOptions()
+</script>
+</body>
+</html>

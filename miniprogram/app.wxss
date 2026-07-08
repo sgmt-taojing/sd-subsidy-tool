@@ -1,0 +1,101 @@
+/** 淘景数科品牌色 */
+:root {
+  --teal: #17B29F;
+  --green: #39D98C;
+  --accent: #1BD1BB;
+  --dark: #1D2129;
+  --gray: #4E5969;
+  --light-bg: #F5F8FA;
+  --white: #FFFFFF;
+  --radius: 8px;
+  --shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  background: var(--light-bg);
+  color: var(--dark);
+  min-height: 100vh;
+}
+.container {
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 16px;
+}
+.btn-primary {
+  display: block;
+  width: 100%;
+  padding: 14px 0;
+  background: linear-gradient(90deg, var(--teal), var(--green));
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+  transition: opacity 0.2s;
+}
+.btn-primary:active { opacity: 0.85; }
+.btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+.card {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--shadow);
+  margin-bottom: 16px;
+}
+.input-group { margin-bottom: 16px; }
+.input-group label {
+  display: block;
+  font-size: 14px;
+  color: var(--dark);
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+.input-group input, .input-group select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #E0E0E0;
+  border-radius: 6px;
+  font-size: 15px;
+  color: var(--dark);
+  outline: none;
+  transition: border-color 0.2s;
+}
+.input-group input:focus, .input-group select:focus {
+  border-color: var(--teal);
+}
+.radio-group {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.radio-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border: 1px solid #E0E0E0;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.radio-label.selected {
+  border-color: var(--teal);
+  background: rgba(23, 178, 159, 0.06);
+  color: var(--teal);
+}
+.page-title {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--dark);
+}
+.page-desc {
+  font-size: 14px;
+  color: var(--gray);
+  margin-bottom: 20px;
+  line-height: 1.5;
+}

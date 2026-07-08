@@ -1,0 +1,35 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/result/result",
+    "pages/about/about"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#17B29F",
+    "navigationBarTitleText": "山东数转奖补自测",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "color": "#4E5969",
+    "selectedColor": "#17B29F",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "奖补自测",
+        "iconPath": "images/icon_calc.png",
+        "selectedIconPath": "images/icon_calc_active.png"
+      },
+      {
+        "pagePath": "pages/about/about",
+        "text": "关于我们",
+        "iconPath": "images/icon_about.png",
+        "selectedIconPath": "images/icon_about_active.png"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

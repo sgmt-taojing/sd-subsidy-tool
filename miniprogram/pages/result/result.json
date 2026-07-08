@@ -1,0 +1,6 @@
+<view class="container" style="padding:40px;text-align:center;">
+  <image src="/images/calc-icon.png" mode="widthFix" style="width:80px;height:80px;margin-bottom:16px;" />
+  <view class="page-title">感谢使用</view>
+  <view class="page-desc" style="margin-bottom:30px;">淘景数科「山东数转奖补自测」工具</view>
+  <button class="btn-primary" bindtap="goHome">重新测算</button>
+</view>

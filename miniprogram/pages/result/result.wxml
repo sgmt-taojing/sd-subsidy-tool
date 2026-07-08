@@ -1,0 +1,51 @@
+<navigation-bar title="测算结果" color="white" background="#17B29F" />
+<scroll-view class="container" scroll-y>
+  <view class="result-hero">
+    <view class="result-label">你预计可申领的奖补</view>
+    <view class="result-amount">
+      <text class="amount-num">{{result.estimateHigh}}</text>
+      <text class="amount-unit">万元</text>
+    </view>
+    <view class="result-range">预估范围：{{result.estimateLow}} - {{result.estimateHigh}}万元</view>
+  </view>
+
+  <view class="card" style="margin-top: 20px;">
+    <view class="section-title">📋 你的投入估算</view>
+    <view class="info-row">
+      <text class="info-label">改造场景</text>
+      <text class="info-value">{{result.sceneCost}}万元起</text>
+    </view>
+    <view class="info-row">
+      <text class="info-label">奖补抵后净支出</text>
+      <text class="info-value highlight">约{{result.selfPay}}万元</text>
+    </view>
+    <view class="info-row">
+      <text class="info-label">所在城市</text>
+      <text class="info-value">{{result.city}}</text>
+    </view>
+  </view>
+
+  <view class="card" wx:if="{{result.tips.length > 0}}">
+    <view class="section-title">💡 建议</view>
+    <view wx:for="{{result.tips}}" wx:key="index" class="tip-item">• {{item}}</view>
+  </view>
+
+  <view class="card">
+    <view class="section-title">📌 下一步做什么</view>
+    <view wx:for="{{result.nextSteps}}" wx:key="index" class="step-item">
+      <view class="step-num">{{index + 1}}</view>
+      <text>{{item}}</text>
+    </view>
+  </view>
+
+  <view class="lead-capture">
+    <view class="lead-title">免费领《山东6市奖补政策指南》</view>
+    <view class="lead-desc">扫码添加淘景数科顾问，获取完整申报攻略</view>
+    <image src="/images/qr-code-placeholder.png" mode="widthFix" class="qr-code" />
+    <button class="btn-primary" bindtap="onContact">立即咨询</button>
+  </view>
+
+  <view style="text-align:center;padding:20px 0 40px;color:#999;font-size:24rpx;">
+    测算结果仅供参考，实际奖补金额以工信局审核为准
+  </view>
+</scroll-view>

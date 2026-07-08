@@ -1,0 +1,52 @@
+<navigation-bar title="关于" color="white" background="#17B29F" />
+<scroll-view class="container" scroll-y>
+  <view class="card" style="text-align:center;">
+    <image src="/images/logo-placeholder.png" mode="widthFix" style="width:160rpx;height:160rpx;margin-bottom:20rpx;" />
+    <view class="about-name">淘景数科</view>
+    <view class="about-slogan">制造业数字化转型的"小快轻准"方案提供商</view>
+  </view>
+
+  <view class="card">
+    <view class="section-title">我们做什么</view>
+    <view class="about-text">
+      专注为山东中小企业提供三块数字化服务：
+    </view>
+    <view class="about-feature">
+      <view class="feature-icon">📊</view>
+      <view>
+        <view class="feature-title">生产报工数字化</view>
+        <view class="feature-desc">车间工人手机扫码报工，主管实时看产量，月底自动出报表</view>
+      </view>
+    </view>
+    <view class="about-feature">
+      <view class="feature-icon">🔧</view>
+      <view>
+        <view class="feature-title">设备联网管理</view>
+        <view class="feature-desc">关键设备加装传感器，运行状态实时监控，故障自动预警</view>
+      </view>
+    </view>
+    <view class="about-feature">
+      <view class="feature-icon">📋</view>
+      <view>
+        <view class="feature-title">质量追溯系统</view>
+        <view class="feature-desc">原料批次可追溯，质检线上化，一键生成质量报告</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="section-title">联系合作</view>
+    <view class="contact-row">
+      <text>📧 邮箱：</text>
+      <text>contact@taojingshuke.com</text>
+    </view>
+    <view class="contact-row">
+      <text>🌐 官网：</text>
+      <text>www.taojingshuke.com</text>
+    </view>
+    <view class="contact-row">
+      <text>📍 城市：</text>
+      <text>覆盖济南、青岛、烟台、淄博、济宁、东营</text>
+    </view>
+  </view>
+</scroll-view>
