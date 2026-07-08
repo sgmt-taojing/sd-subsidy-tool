@@ -3,206 +3,636 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>山东数转奖补自测 — 淘景数科</title>
+<title>山东数转奖补自测 v2.0 — 淘景数科</title>
 <style>
-/* 淘景数科品牌风格 */
-:root { --teal: #17B29F; --green: #39D98C; --dark: #1D2129; --gray: #4E5969; --lg: #F5F8FA; --radius: 12px; }
+/* ===== 淘景数科 品牌系统 v2.0 ===== */
+:root {
+  --teal: #17B29F;
+  --teal-dark: #0E8A7A;
+  --teal-light: rgba(23,178,159,0.08);
+  --green: #39D98C;
+  --gradient: linear-gradient(135deg, #17B29F, #39D98C);
+  --gradient-hover: linear-gradient(135deg, #0E8A7A, #2DC87A);
+  --dark: #1D2129;
+  --gray-600: #4E5969;
+  --gray-400: #86909C;
+  --gray-200: #E5E6EB;
+  --gray-100: #F2F3F5;
+  --bg: #F7F8FA;
+  --white: #FFFFFF;
+  --radius-sm: 8px;
+  --radius: 12px;
+  --radius-lg: 16px;
+  --shadow: 0 2px 8px rgba(0,0,0,0.06);
+  --shadow-lg: 0 4px 20px rgba(0,0,0,0.08);
+  --font: -apple-system, 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', sans-serif;
+}
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif; background: var(--lg); color: var(--dark); min-height: 100vh; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--dark);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===== Header ===== */
 .header {
-  background: linear-gradient(135deg, var(--teal), var(--green));
-  color: white; padding: 48px 20px 32px; text-align: center;
+  background: var(--gradient);
+  color: white;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
 }
-.header h1 { font-size: 24px; font-weight: 600; }
-.header p { font-size: 14px; opacity: 0.85; margin-top: 8px; line-height: 1.5; }
-.container { max-width: 420px; margin: 0 auto; padding: 16px; }
-.card { background: white; border-radius: var(--radius); padding: 20px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); margin-bottom: 16px; }
-.form-group { margin-bottom: 18px; }
-.form-group label { display: block; font-size: 14px; font-weight: 500; margin-bottom: 6px; color: var(--dark); }
-.form-group select, .form-group input { width: 100%; padding: 12px; border: 1px solid #E0E0E0; border-radius: 8px; font-size: 15px; background: white; -webkit-appearance: none; }
-.options { display: flex; flex-wrap: wrap; gap: 8px; }
+.header::before {
+  content: '';
+  position: absolute;
+  top: -50%; right: -20%;
+  width: 300px; height: 300px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 50%;
+}
+.header::after {
+  content: '';
+  position: absolute;
+  bottom: -30%; left: -10%;
+  width: 200px; height: 200px;
+  background: rgba(255,255,255,0.04);
+  border-radius: 50%;
+}
+.header-inner {
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 52px 24px 36px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+.header-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.2);
+  font-size: 12px;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+  backdrop-filter: blur(4px);
+}
+.header h1 { font-size: 26px; font-weight: 700; line-height: 1.3; }
+.header .subtitle {
+  font-size: 14px;
+  opacity: 0.85;
+  margin-top: 10px;
+  line-height: 1.6;
+  max-width: 320px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ===== Container ===== */
+.container { max-width: 420px; margin: -16px auto 0; padding: 0 16px 80px; position: relative; z-index: 2; }
+.card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow);
+  margin-bottom: 16px;
+  transition: box-shadow 0.3s;
+}
+.card:hover { box-shadow: var(--shadow-lg); }
+
+/* ===== Form ===== */
+.section-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gray-600);
+  letter-spacing: 0.5px;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--gray-100);
+}
+.form-group { margin-bottom: 20px; }
+.form-group:last-child { margin-bottom: 0; }
+.form-group label {
+  display: block; font-size: 14px; font-weight: 500;
+  margin-bottom: 8px; color: var(--dark);
+}
+.form-group label .label-tip {
+  font-weight: 400; color: var(--gray-400); font-size: 12px;
+}
+.form-group select {
+  width: 100%; padding: 12px 14px;
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-sm);
+  font-size: 15px; font-family: var(--font);
+  background: var(--white) url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%2386909C' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 14px center;
+  -webkit-appearance: none;
+  appearance: none;
+  transition: border-color 0.2s;
+  outline: none;
+  color: var(--dark);
+}
+.form-group select:focus { border-color: var(--teal); }
+.form-group select:invalid { color: var(--gray-400); }
+
+/* ===== Options chips ===== */
+.options {
+  display: flex; flex-wrap: wrap; gap: 8px;
+}
 .option {
-  padding: 8px 16px; border: 1px solid #E0E0E0; border-radius: 8px; font-size: 13px; cursor: pointer;
-  transition: all 0.2s; background: white;
+  padding: 9px 18px;
+  border: 1.5px solid var(--gray-200);
+  border-radius: 20px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4,0,0.2,1);
+  background: var(--white);
+  color: var(--gray-600);
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
-.option.selected { border-color: var(--teal); background: rgba(23,178,159,0.06); color: var(--teal); font-weight: 500; }
+.option:hover { border-color: var(--teal); color: var(--teal); }
+.option.selected {
+  border-color: var(--teal);
+  background: var(--teal-light);
+  color: var(--teal-dark);
+  font-weight: 600;
+  box-shadow: 0 0 0 1px var(--teal);
+}
+.option.selected::before { content: '✓ '; font-weight: 700; }
+
+/* ===== Button ===== */
 .btn {
-  display: block; width: 100%; padding: 14px 0; border: none; border-radius: var(--radius); font-size: 16px; font-weight: 600;
-  background: linear-gradient(90deg, var(--teal), var(--green)); color: white; cursor: pointer; text-align: center; transition: opacity 0.2s;
+  display: block; width: 100%; padding: 16px 0;
+  border: none; border-radius: var(--radius);
+  font-size: 16px; font-weight: 600;
+  font-family: var(--font);
+  cursor: pointer; text-align: center;
+  transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+  position: relative; overflow: hidden;
 }
-.btn:disabled { opacity: 0.4; cursor: not-allowed; }
-.btn:active:not(:disabled) { opacity: 0.8; }
-.hidden { display: none; }
-.result-hero { background: linear-gradient(135deg, var(--teal), var(--green)); border-radius: var(--radius); padding: 32px 20px; text-align: center; color: white; margin-bottom: 16px; }
-.result-hero .label { font-size: 14px; opacity: 0.9; }
-.result-hero .amount { font-size: 56px; font-weight: 700; display: block; margin: 8px 0; }
-.result-hero .amount span { font-size: 20px; font-weight: 400; }
-.result-hero .range { font-size: 13px; opacity: 0.8; }
-.info-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #F0F0F0; }
+.btn-primary {
+  background: var(--gradient);
+  color: white;
+  box-shadow: 0 4px 14px rgba(23,178,159,0.3);
+}
+.btn-primary:hover:not(:disabled) { background: var(--gradient-hover); box-shadow: 0 6px 20px rgba(23,178,159,0.4); transform: translateY(-1px); }
+.btn-primary:active:not(:disabled) { transform: translateY(0); box-shadow: 0 2px 8px rgba(23,178,159,0.3); }
+.btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none !important; }
+.btn-secondary {
+  background: var(--white);
+  color: var(--gray-600);
+  border: 1.5px solid var(--gray-200);
+  box-shadow: none;
+}
+.btn-secondary:hover { border-color: var(--teal); color: var(--teal); }
+
+/* ===== Loading ===== */
+.loading-overlay {
+  display: none;
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.3);
+  z-index: 100;
+  justify-content: center; align-items: center;
+}
+.loading-overlay.active { display: flex; }
+.loading-box {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 40px 48px;
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+}
+.spinner {
+  width: 48px; height: 48px;
+  border: 4px solid var(--gray-200);
+  border-top: 4px solid var(--teal);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto 16px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.loading-text { font-size: 15px; color: var(--gray-600); }
+
+/* ===== Result Hero ===== */
+.result-page { animation: fadeUp 0.5s ease; }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.result-hero {
+  background: var(--gradient);
+  border-radius: var(--radius-lg);
+  padding: 36px 24px;
+  text-align: center;
+  color: white;
+  margin-bottom: 16px;
+  position: relative;
+  overflow: hidden;
+}
+.result-hero::before {
+  content: '🎉';
+  position: absolute;
+  top: 12px; right: 16px;
+  font-size: 32px;
+  opacity: 0.6;
+}
+.result-hero .label { font-size: 13px; opacity: 0.85; letter-spacing: 0.5px; }
+.result-hero .amount {
+  font-size: 64px; font-weight: 700;
+  display: block; margin: 4px 0;
+  line-height: 1.1;
+}
+.result-hero .amount .unit { font-size: 22px; font-weight: 400; opacity: 0.9; }
+.result-hero .range { font-size: 13px; opacity: 0.75; margin-top: 4px; }
+
+/* ===== Info rows & Breakdown ===== */
+.info-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--gray-100);
+}
 .info-row:last-child { border-bottom: none; }
-.section-title { font-size: 17px; font-weight: 600; margin-bottom: 12px; color: var(--dark); }
-.step-item { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid #F5F5F5; }
+.info-label { font-size: 14px; color: var(--gray-600); }
+.info-value { font-size: 14px; color: var(--dark); font-weight: 500; }
+.info-value.highlight { color: var(--teal); font-weight: 700; }
+
+.breakdown-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 8px; }
+.breakdown-table th {
+  background: var(--gray-100);
+  padding: 8px 10px;
+  text-align: left;
+  font-weight: 500;
+  color: var(--gray-600);
+  font-size: 12px;
+}
+.breakdown-table td {
+  padding: 10px;
+  border-bottom: 1px solid var(--gray-100);
+}
+.breakdown-table tr:last-child td { border-bottom: none; color: var(--teal); font-weight: 600; }
+
+/* ===== Section ===== */
+.section-title {
+  font-size: 16px; font-weight: 600;
+  margin-bottom: 4px; color: var(--dark);
+}
+.section-sub {
+  font-size: 13px; color: var(--gray-400);
+  margin-bottom: 16px;
+}
+
+/* ===== Steps ===== */
+.step-item {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--gray-100);
+}
 .step-item:last-child { border-bottom: none; }
 .step-num {
   width: 28px; height: 28px; border-radius: 50%;
-  background: linear-gradient(135deg, var(--teal), var(--green)); color: white;
-  display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; flex-shrink: 0;
+  background: var(--gradient);
+  color: white;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 600; flex-shrink: 0; margin-top: 2px;
 }
-.tip-item { font-size: 14px; color: var(--gray); padding: 4px 0; }
-.footer { text-align: center; padding: 20px; font-size: 12px; color: #999; }
+.step-text { font-size: 14px; color: var(--dark); line-height: 1.5; }
+.step-text .em { color: var(--teal); font-weight: 500; }
+
+/* ===== Tips ===== */
+.tip-item {
+  display: flex; gap: 8px; align-items: flex-start;
+  padding: 8px 0; font-size: 14px; color: var(--gray-600); line-height: 1.5;
+}
+.tip-dot { color: var(--teal); flex-shrink: 0; }
+
+/* ===== Lead capture ===== */
+.lead-card {
+  background: linear-gradient(135deg, rgba(23,178,159,0.04), rgba(57,217,140,0.04));
+  border: 1.5px solid var(--teal);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  text-align: center;
+}
+.lead-card .icon { font-size: 36px; margin-bottom: 12px; }
+.lead-card h3 { font-size: 17px; font-weight: 600; margin-bottom: 6px; }
+.lead-card p { font-size: 13px; color: var(--gray-600); margin-bottom: 16px; line-height: 1.5; }
+.lead-card .btn-ghost {
+  display: inline-block; padding: 10px 24px;
+  border: 1.5px solid var(--teal); border-radius: 20px;
+  color: var(--teal); font-size: 14px; font-weight: 500;
+  text-decoration: none; transition: all 0.2s;
+}
+.lead-card .btn-ghost:hover { background: var(--teal); color: white; }
+
+/* ===== About page ===== */
+.about-page { padding: 16px 0 80px; animation: fadeUp 0.4s ease; }
+.about-logo {
+  width: 64px; height: 64px;
+  background: var(--gradient);
+  border-radius: 16px;
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-size: 24px; font-weight: 700;
+  margin: 0 auto 16px;
+}
+.about-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow);
+  margin-bottom: 16px;
+}
+.about-card h3 { font-size: 16px; font-weight: 600; margin-bottom: 12px; }
+.about-card p { font-size: 14px; color: var(--gray-600); line-height: 1.7; }
+.about-service {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 0; border-bottom: 1px solid var(--gray-100);
+}
+.about-service:last-child { border-bottom: none; }
+.about-service .s-icon { font-size: 24px; }
+.about-service .s-text { font-size: 14px; }
+.about-service .s-desc { font-size: 12px; color: var(--gray-400); }
+
+/* ===== Nav Bar ===== */
 .nav-bar {
-  display: flex; background: white; border-top: 1px solid #eee; position: fixed; bottom: 0; width: 100%; max-width: 420px;
+  display: flex;
+  background: var(--white);
+  border-top: 0.5px solid var(--gray-200);
+  position: fixed; bottom: 0;
+  width: 100%;
+  max-width: 420px;
   left: 50%; transform: translateX(-50%);
+  z-index: 50;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
-.nav-item { flex: 1; text-align: center; padding: 8px 0; font-size: 11px; color: var(--gray); cursor: pointer; }
+.nav-item {
+  flex: 1; text-align: center;
+  padding: 8px 0;
+  font-size: 11px; color: var(--gray-400);
+  cursor: pointer;
+  transition: color 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
 .nav-item.active { color: var(--teal); }
-.nav-icon { font-size: 20px; display: block; margin-bottom: 2px; }
+.nav-item .icon { font-size: 22px; display: block; margin-bottom: 2px; }
+
+/* ===== Footer ===== */
+.footer {
+  text-align: center; padding: 20px;
+  font-size: 12px; color: var(--gray-400);
+}
+
+/* ===== Animation helpers ===== */
+.fade-in { animation: fadeUp 0.5s ease; }
+.count-up { display: inline-block; }
+
+/* ===== Toast ===== */
+.toast {
+  position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%);
+  background: var(--dark); color: white;
+  padding: 12px 24px; border-radius: 24px;
+  font-size: 14px; z-index: 200;
+  opacity: 0; transition: opacity 0.3s;
+  pointer-events: none;
+  white-space: nowrap;
+}
+.toast.show { opacity: 1; }
+
+/* ===== Responsive ===== */
+@media (max-width: 420px) {
+  .header-inner { padding: 40px 20px 28px; }
+  .header h1 { font-size: 22px; }
+  .result-hero .amount { font-size: 48px; }
+  .container { margin-top: -12px; }
+}
 </style>
 </head>
 <body>
 
+<!-- Loading -->
+<div class="loading-overlay" id="loading">
+  <div class="loading-box">
+    <div class="spinner"></div>
+    <div class="loading-text">正在测算你的奖补金额...</div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<!-- Header -->
 <div class="header">
-  <h1>你能拿多少奖补？</h1>
-  <p>填几个基本信息，免费测算山东省各城市的中小企业数字化转型奖补金额。</p>
+  <div class="header-inner">
+    <div class="header-badge">免费 · 1分钟出结果</div>
+    <h1>你的企业<br>能拿多少奖补？</h1>
+    <p class="subtitle">填几个基本信息，免费测算山东省各城市中小企业数字化转型奖补。不留手机号也能算。</p>
+  </div>
 </div>
 
 <div class="container" id="app">
-  <!-- 自测表单 -->
-  <div id="stepForm">
-    <div class="card">
-      <div class="form-group">
-        <label>公司所在城市</label>
-        <select id="city">
-          <option value="">请选择城市</option>
-          <option value="济南">济南（最高100万）</option>
-          <option value="青岛">青岛（最高100万）</option>
-          <option value="烟台">烟台（最高80万）</option>
-          <option value="淄博">淄博（最高60万）</option>
-          <option value="济宁">济宁（最高50万）</option>
-          <option value="东营">东营（最高80万）</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>员工规模</label>
-        <div class="options" id="employeeOptions">
-          <span class="option" data-value="1-50">1-50人</span>
-          <span class="option" data-value="51-200">51-200人</span>
-          <span class="option" data-value="201-500">201-500人</span>
-          <span class="option" data-value="500+">500人以上</span>
-        </div>
-      </div>
-      <div class="form-group">
-        <label>所属行业</label>
-        <div class="options" id="industryOptions">
-          <span class="option" data-value="机械制造">机械制造</span>
-          <span class="option" data-value="食品加工">食品加工</span>
-          <span class="option" data-value="化工">化工/石化</span>
-          <span class="option" data-value="电子">电子/电气</span>
-          <span class="option" data-value="纺织">纺织/服装</span>
-          <span class="option" data-value="其他">其他制造业</span>
-        </div>
-      </div>
-      <div class="form-group">
-        <label>目前数字化程度</label>
-        <div class="options" id="levelOptions">
-          <span class="option" data-value="无">基本为零</span>
-          <span class="option" data-value="基础">用Excel/ERP</span>
-          <span class="option" data-value="部分">部分数字化</span>
-          <span class="option" data-value="较完善">较完善</span>
-        </div>
-      </div>
-      <div class="form-group">
-        <label>想从哪个场景开始</label>
-        <div class="options" id="sceneOptions">
-          <span class="option" data-value="生产报工">生产报工</span>
-          <span class="option" data-value="设备联网">设备联网</span>
-          <span class="option" data-value="质量追溯">质量追溯</span>
-          <span class="option" data-value="全都要">以上全部</span>
-        </div>
+
+  <!-- ===== Form ===== -->
+  <div id="formPage" class="card">
+    <div class="section-label">📋 企业信息</div>
+
+    <div class="form-group">
+      <label>公司所在城市 <span class="label-tip">(山东)</span></label>
+      <select id="city">
+        <option value="">请选择城市</option>
+        <option value="济南">济南 — 最高100万</option>
+        <option value="青岛">青岛 — 最高100万</option>
+        <option value="烟台">烟台 — 最高80万</option>
+        <option value="淄博">淄博 — 最高60万</option>
+        <option value="济宁">济宁 — 最高50万</option>
+        <option value="东营">东营 — 最高80万</option>
+        <option value="潍坊">潍坊 — 最高80万</option>
+        <option value="临沂">临沂 — 最高60万</option>
+        <option value="威海">威海 — 最高50万</option>
+        <option value="泰安">泰安 — 最高50万</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>员工规模</label>
+      <div class="options" id="employeeOptions">
+        <span class="option" data-value="1-50">1-50人</span>
+        <span class="option" data-value="51-200">51-200人</span>
+        <span class="option" data-value="201-500">201-500人</span>
+        <span class="option" data-value="500+">500人以上</span>
       </div>
     </div>
-    <button class="btn" id="submitBtn" disabled>立即测算奖补金额</button>
+
+    <div class="form-group">
+      <label>所属行业 <span class="label-tip">(制造业)</span></label>
+      <div class="options" id="industryOptions">
+        <span class="option" data-value="机械制造">机械制造</span>
+        <span class="option" data-value="食品加工">食品加工</span>
+        <span class="option" data-value="化工">化工/石化</span>
+        <span class="option" data-value="电子">电子/电气</span>
+        <span class="option" data-value="纺织">纺织/服装</span>
+        <span class="option" data-value="其他">其他制造业</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>目前数字化程度 <span class="label-tip">(越基础拿越多)</span></label>
+      <div class="options" id="levelOptions">
+        <span class="option" data-value="无">基本为零，全靠手工</span>
+        <span class="option" data-value="基础">用Excel/ERP但不通</span>
+        <span class="option" data-value="部分">个别环节已数字化</span>
+        <span class="option" data-value="较完善">大部分已信息化</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>想从哪个场景开始？</label>
+      <div class="options" id="sceneOptions">
+        <span class="option" data-value="生产报工">📊 生产报工</span>
+        <span class="option" data-value="设备联网">🔧 设备联网</span>
+        <span class="option" data-value="质量追溯">📋 质量追溯</span>
+        <span class="option" data-value="全都要">🎯 以上全部</span>
+      </div>
+    </div>
   </div>
 
-  <!-- 结果页 -->
-  <div id="stepResult" class="hidden">
+  <button class="btn btn-primary" id="submitBtn" disabled>
+    <span>立即测算奖补金额</span>
+  </button>
+
+  <!-- ===== Result ===== -->
+  <div id="resultPage" style="display:none;" class="result-page">
     <div class="result-hero">
       <div class="label">你预计可申领的奖补</div>
-      <div class="amount" id="resultAmount">0<span>万元</span></div>
+      <div class="amount"><span class="count-up" id="resultAmount">0</span><span class="unit">万元</span></div>
       <div class="range" id="resultRange">预估范围：0 - 0万元</div>
     </div>
+
     <div class="card">
-      <div class="section-title">📋 投入估算</div>
-      <div class="info-row"><span>改造场景</span><span id="costInfo">-</span></div>
-      <div class="info-row"><span style="color:var(--teal);font-weight:600;">奖补抵后净支出</span><span id="selfPayInfo" style="color:var(--teal);font-weight:600;">-</span></div>
-      <div class="info-row"><span>所在城市</span><span id="cityInfo">-</span></div>
+      <div class="section-title">📋 投入与产出</div>
+      <div class="section-sub">基于你选择的场景估算</div>
+      <div class="info-row">
+        <span class="info-label">改造场景</span>
+        <span class="info-value" id="costInfo">-</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">所在城市</span>
+        <span class="info-value" id="cityInfo">-</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">💵 奖补抵后净支出</span>
+        <span class="info-value highlight" id="selfPayInfo">-</span>
+      </div>
     </div>
+
+    <div class="card">
+      <div class="section-title">📐 测算明细</div>
+      <div class="section-sub">拆解你的奖补构成</div>
+      <table class="breakdown-table">
+        <thead><tr><th>因子</th><th>系数</th><th>说明</th></tr></thead>
+        <tbody id="breakdownBody"></tbody>
+      </table>
+    </div>
+
     <div class="card" id="tipsCard" style="display:none;">
       <div class="section-title">💡 建议</div>
       <div id="tipsList"></div>
     </div>
+
     <div class="card">
       <div class="section-title">📌 下一步</div>
       <div id="nextSteps"></div>
     </div>
-    <div class="card" style="border:1px solid var(--teal);text-align:center;">
-      <div style="font-size:16px;font-weight:600;margin-bottom:8px;">免费领《山东6市奖补政策指南》</div>
-      <div style="font-size:13px;color:var(--gray);margin-bottom:12px;">扫码添加淘景数科顾问，获取完整申报攻略</div>
-      <div style="font-size:12px;color:#999;">（联系微信：taojing-shuke → 备注"奖补"）</div>
-      <button class="btn" style="margin-top:12px;" onclick="location.href='https://www.taojingshuke.com'">访问官网咨询</button>
+
+    <div class="lead-card">
+      <div class="icon">📘</div>
+      <h3>免费领《山东10市奖补政策指南》</h3>
+      <p>含各城市申报条件、截止时间、材料清单，扫码联系顾问直接领取。</p>
+      <a class="btn-ghost" href="https://www.taojingshuke.com" target="_blank">访问官网咨询 &rarr;</a>
     </div>
-    <button class="btn" style="margin-bottom:40px;background:linear-gradient(90deg,#999,#bbb);" onclick="resetForm()">重新测算</button>
+
+    <button class="btn btn-secondary" style="margin-bottom:60px;" onclick="resetForm()">← 重新测算</button>
   </div>
-</div>
 
-<div class="nav-bar">
-  <div class="nav-item active" onclick="showForm()"><span class="nav-icon">📊</span>奖补自测</div>
-  <div class="nav-item" onclick="showAbout()"><span class="nav-icon">ℹ️</span>关于我们</div>
-</div>
+  <!-- ===== About ===== -->
+  <div id="aboutPage" style="display:none;" class="about-page">
+    <div class="about-card" style="text-align:center;">
+      <div class="about-logo">淘</div>
+      <h2 style="font-size:22px;font-weight:700;margin-bottom:4px;">淘景数科</h2>
+      <p style="font-size:14px;color:var(--gray-600);margin-bottom:20px;">制造业数字化转型"小快轻准"方案提供商</p>
+    </div>
 
-<div class="footer">
-  <div style="display:none" id="aboutPage">
-    <div class="card" style="text-align:center;margin-bottom:60px;">
-      <div style="font-size:28px;font-weight:700;margin-bottom:8px;">淘景数科</div>
-      <div style="font-size:14px;color:var(--gray);line-height:1.6;margin-bottom:20px;">制造业数字化转型的"小快轻准"方案提供商</div>
-      <div style="text-align:left;">
-        <div style="padding:10px 0;border-bottom:1px solid #f0f0f0;">📊 生产报工数字化 — 手机扫码报工，实时看产量</div>
-        <div style="padding:10px 0;border-bottom:1px solid #f0f0f0;">🔧 设备联网管理 — 传感器监控，故障自动预警</div>
-        <div style="padding:10px 0;border-bottom:1px solid #f0f0f0;">📋 质量追溯系统 — 原料可追溯，质检线上化</div>
+    <div class="about-card">
+      <h3>我们的服务</h3>
+      <div class="about-service">
+        <span class="s-icon">📊</span>
+        <div><div class="s-text">生产报工数字化</div><div class="s-desc">手机扫码报工，实时看产量</div></div>
+      </div>
+      <div class="about-service">
+        <span class="s-icon">🔧</span>
+        <div><div class="s-text">设备联网管理</div><div class="s-desc">传感器监控，故障自动预警</div></div>
+      </div>
+      <div class="about-service">
+        <span class="s-icon">📋</span>
+        <div><div class="s-text">质量追溯系统</div><div class="s-desc">原料可追溯，质检线上化</div></div>
       </div>
     </div>
+
+    <div class="about-card">
+      <h3>为什么选我们</h3>
+      <p>20人专业团队覆盖研发、售前、实施全链条，专注山东制造业数字化转型。我们不做大而全的平台，只做"小快轻准"的实用方案——小投入、快部署、轻运维、精准解决问题。</p>
+      <p style="margin-top:12px;">官网：<a href="https://www.taojingshuke.com" target="_blank" style="color:var(--teal);text-decoration:none;">taojingshuke.com</a></p>
+    </div>
+
+    <button class="btn btn-secondary" onclick="showForm()">← 返回自测</button>
   </div>
-  © 淘景数科 2026 · 鲁ICP备XXXXXXXX号
 </div>
 
+<!-- Nav Bar -->
+<div class="nav-bar">
+  <div class="nav-item active" id="navCalc" onclick="showForm()"><span class="icon">📊</span>奖补自测</div>
+  <div class="nav-item" id="navAbout" onclick="showAbout()"><span class="icon">ℹ️</span>关于我们</div>
+</div>
+
+<div class="footer">© 淘景数科 2026 · 制造业数字化转型"小快轻准"方案提供商</div>
+
 <script>
+/* ===== 奖补规则库 ===== */
 const RULES = {
-  '济南': { max: 100, industry: { 机械制造:1.1, 食品加工:1.0, 化工:1.0, 电子:1.15, 纺织:0.95, 其他:1.0 }, level: { 无:1.2, 基础:1.0, 部分:0.8, 较完善:0.6 } },
-  '青岛': { max: 100, industry: { 机械制造:1.0, 食品加工:0.95, 化工:1.05, 电子:1.2, 纺织:0.9, 其他:1.0 }, level: { 无:1.2, 基础:1.0, 部分:0.8, 较完善:0.6 } },
-  '烟台': { max: 80, industry: { 机械制造:1.15, 食品加工:1.0, 化工:1.2, 电子:1.0, 纺织:0.9, 其他:1.0 }, level: { 无:1.15, 基础:1.0, 部分:0.85, 较完善:0.65 } },
-  '淄博': { max: 60, industry: { 机械制造:1.0, 食品加工:0.95, 化工:1.25, 电子:1.0, 纺织:1.05, 其他:1.0 }, level: { 无:1.1, 基础:1.0, 部分:0.85, 较完善:0.7 } },
-  '济宁': { max: 50, industry: { 机械制造:1.2, 食品加工:1.1, 化工:1.0, 电子:1.0, 纺织:1.1, 其他:1.0 }, level: { 无:1.1, 基础:1.0, 部分:0.9, 较完善:0.7 } },
-  '东营': { max: 80, industry: { 机械制造:1.0, 食品加工:0.9, 化工:1.3, 电子:1.0, 纺织:0.85, 其他:1.0 }, level: { 无:1.15, 基础:1.0, 部分:0.85, 较完善:0.65 } },
+  济南: { max: 100, industry: { 机械制造:1.1, 食品加工:1.0, 化工:1.0, 电子:1.15, 纺织:0.95, 其他:1.0 }, level: { 无:1.2, 基础:1.0, 部分:0.8, 较完善:0.6 }, empExtra: { '51-200':3, '201-500':8, '500+':15 }, desc: '省会，奖补力度全省领先' },
+  青岛: { max: 100, industry: { 机械制造:1.0, 食品加工:0.95, 化工:1.05, 电子:1.2, 纺织:0.9, 其他:1.0 }, level: { 无:1.2, 基础:1.0, 部分:0.8, 较完善:0.6 }, empExtra: { '51-200':3, '201-500':8, '500+':15 }, desc: '计划单列市，电子电气重点扶持' },
+  烟台: { max: 80, industry: { 机械制造:1.15, 食品加工:1.0, 化工:1.2, 电子:1.0, 纺织:0.9, 其他:1.0 }, level: { 无:1.15, 基础:1.0, 部分:0.85, 较完善:0.65 }, empExtra: { '51-200':3, '201-500':8, '500+':12 }, desc: '制造业重镇，机械/化工优先' },
+  潍坊: { max: 80, industry: { 机械制造:1.1, 食品加工:1.05, 化工:1.1, 电子:1.0, 纺织:0.95, 其他:1.0 }, level: { 无:1.1, 基础:1.0, 部分:0.85, 较完善:0.65 }, empExtra: { '51-200':2, '201-500':6, '500+':10 }, desc: '制造业大市，各行业均衡支持' },
+  淄博: { max: 60, industry: { 机械制造:1.0, 食品加工:0.95, 化工:1.25, 电子:1.0, 纺织:1.05, 其他:1.0 }, level: { 无:1.1, 基础:1.0, 部分:0.85, 较完善:0.7 }, empExtra: { '51-200':2, '201-500':5, '500+':10 }, desc: '化工重镇，石化企业奖补力度大' },
+  东营: { max: 80, industry: { 机械制造:1.0, 食品加工:0.9, 化工:1.3, 电子:1.0, 纺织:0.85, 其他:1.0 }, level: { 无:1.15, 基础:1.0, 部分:0.85, 较完善:0.65 }, empExtra: { '51-200':3, '201-500':8, '500+':15 }, desc: '石化基地，化工奖补优势明显' },
+  济宁: { max: 50, industry: { 机械制造:1.2, 食品加工:1.1, 化工:1.0, 电子:1.0, 纺织:1.1, 其他:1.0 }, level: { 无:1.1, 基础:1.0, 部分:0.9, 较完善:0.7 }, empExtra: { '51-200':2, '201-500':5, '500+':8 }, desc: '装备制造特色明显' },
+  临沂: { max: 60, industry: { 机械制造:1.0, 食品加工:1.15, 化工:1.0, 电子:1.0, 纺织:1.0, 其他:1.0 }, level: { 无:1.1, 基础:1.0, 部分:0.9, 较完善:0.7 }, empExtra: { '51-200':2, '201-500':5, '500+':8 }, desc: '食品加工和商贸物流特色' },
+  威海: { max: 50, industry: { 机械制造:1.0, 食品加工:1.5, 化工:0.9, 电子:1.1, 纺织:1.2, 其他:1.0 }, level: { 无:1.1, 基础:1.0, 部分:0.9, 较完善:0.7 }, empExtra: { '51-200':2, '201-500':5, '500+':8 }, desc: '海洋食品/纺织海产品加工产业' },
+  泰安: { max: 50, industry: { 机械制造:1.1, 食品加工:1.0, 化工:1.0, 电子:1.0, 纺织:0.95, 其他:1.0 }, level: { 无:1.1, 基础:1.0, 部分:0.9, 较完善:0.7 }, empExtra: { '51-200':2, '201-500':5, '500+':8 }, desc: '装备制造重点支持' },
 }
 const SCENE_COST = { 生产报工: 8, 设备联网: 12, 质量追溯: 10, 全都要: 25 }
-const EMP_BONUS = { '1-50': 0, '51-200': 5, '201-500': 10, '500+': 15 }
 
 let form = { city: '', employee: '', industry: '', level: '', scene: '' }
 
+/* ===== 初始化选项 ===== */
 function initOptions() {
   document.querySelectorAll('.options').forEach(el => {
     el.querySelectorAll('.option').forEach(opt => {
-      opt.addEventListener('click', () => {
-        el.querySelectorAll('.option').forEach(o => o.classList.remove('selected'))
-        opt.classList.add('selected')
-        const field = el.id.replace('Options', '')
-        form[field] = opt.dataset.value
+      opt.addEventListener('click', function() {
+        const parent = this.parentElement
+        parent.querySelectorAll('.option').forEach(o => o.classList.remove('selected'))
+        this.classList.add('selected')
+        const field = parent.id.replace('Options', '')
+        form[field] = this.dataset.value
         checkSubmit()
       })
     })
   })
   document.getElementById('city').addEventListener('change', e => {
-    form.city = e.target.value; checkSubmit()
+    form.city = e.target.value
+    checkSubmit()
   })
 }
 
@@ -212,62 +642,142 @@ function checkSubmit() {
   btn.disabled = !ok
 }
 
-function calc() {
-  const rule = RULES[form.city]
-  if (!rule) return
-  const ib = rule.industry[form.industry] || 1.0
-  const lm = rule.level[form.level] || 1.0
-  const eb = EMP_BONUS[form.employee] || 0
-  const sc = SCENE_COST[form.scene] || 10
-  const est = Math.round(rule.max * ib * lm * 0.5 + eb)
-  const capped = Math.min(est, rule.max + eb)
-  const selfPay = Math.max(0, Math.round(sc * 0.5 - capped * (sc / 50)))
-
-  document.getElementById('stepForm').classList.add('hidden')
-  document.getElementById('stepResult').classList.remove('hidden')
-  document.getElementById('resultAmount').innerHTML = capped + '<span>万元</span>'
-  document.getElementById('resultRange').textContent = `预估范围：${Math.round(capped * 0.6)} - ${capped}万元`
-  document.getElementById('costInfo').textContent = sc + '万元起'
-  document.getElementById('selfPayInfo').textContent = '约' + selfPay + '万元'
-  document.getElementById('cityInfo').textContent = form.city
-
-  const tips = []
-  if (capped >= 50) tips.push('根据企业规模和政策覆盖，你属于高优先支持对象')
-  if (form.level === '无' || form.level === '基础') tips.push('数字化基础薄弱 = 改造空间大 = 奖补优先级高')
-  if (form.scene !== '全都要') tips.push('先做一个场景打出效果，后续扩展更容易')
-
-  if (tips.length) {
-    document.getElementById('tipsCard').style.display = 'block'
-    document.getElementById('tipsList').innerHTML = tips.map(t => '<div class="tip-item">• ' + t + '</div>').join('')
+/* ===== 数字滚动动画 ===== */
+function animateNumber(el, target, suffix) {
+  const duration = 800
+  const start = 0
+  const startTime = performance.now()
+  function update(currentTime) {
+    const elapsed = currentTime - startTime
+    const progress = Math.min(elapsed / duration, 1)
+    const eased = 1 - Math.pow(1 - progress, 3)
+    const current = Math.round(start + (target - start) * eased)
+    el.textContent = current + (suffix || '')
+    if (progress < 1) requestAnimationFrame(update)
   }
-
-  const steps = ['联系淘景数科获取详细申报方案', '安排免费工厂数字化诊断', '准备申报材料提交工信局']
-  document.getElementById('nextSteps').innerHTML = steps.map((s, i) =>
-    '<div class="step-item"><span class="step-num">' + (i+1) + '</span>' + s + '</div>'
-  ).join('')
+  requestAnimationFrame(update)
 }
 
+/* ===== 主测算 ===== */
+function calc() {
+  const rule = RULES[form.city]
+  if (!rule) return showToast('暂不支持该城市')
+
+  showLoading()
+
+  setTimeout(() => {
+    const ib = rule.industry[form.industry] || 1.0
+    const lm = rule.level[form.level] || 1.0
+    const empExtra = rule.empExtra[form.employee] || 0
+    const sc = SCENE_COST[form.scene] || 10
+    const est = Math.round(rule.max * ib * lm * 0.5 + empExtra)
+    const capped = Math.min(est, rule.max + empExtra)
+    const selfPay = Math.max(0, Math.round(sc * 0.5 - capped * (sc / 50)))
+    const low = Math.round(capped * 0.6)
+
+    hideLoading()
+    document.getElementById('formPage').style.display = 'none'
+    document.getElementById('submitBtn').style.display = 'none'
+    document.getElementById('resultPage').style.display = 'block'
+    document.getElementById('resultPage').scrollIntoView({ behavior: 'smooth' })
+
+    animateNumber(document.getElementById('resultAmount'), capped, '')
+    document.getElementById('resultAmount').innerHTML = '<span class="count-up">' + capped + '</span><span class="unit">万元</span>'
+    document.getElementById('resultRange').textContent = '预估范围：' + low + ' - ' + capped + '万元'
+    document.getElementById('costInfo').textContent = sc + '万元起'
+    document.getElementById('selfPayInfo').textContent = '约' + selfPay + '万元'
+    document.getElementById('cityInfo').textContent = form.city + '（' + rule.desc + '）'
+
+    // 测算明细表
+    const breakdownBody = document.getElementById('breakdownBody')
+    const indFactor = (ib * 100).toFixed(0) + '%'
+    const levelFactor = (lm * 100).toFixed(0) + '%'
+    const empNote = empExtra > 0 ? '+'+empExtra+'万' : '无额外补贴'
+    breakdownBody.innerHTML = [
+      '<tr><td>基础奖补额</td><td>'+rule.max+'万</td><td>'+form.city+'最高奖补额度</td></tr>',
+      '<tr><td>行业系数</td><td>'+indFactor+'</td><td>'+form.industry+'行业调整</td></tr>',
+      '<tr><td>数字化水平系数</td><td>'+levelFactor+'</td><td>当前：'+form.level+'</td></tr>',
+      '<tr><td>员工规模补贴</td><td>'+empNote+'</td><td>'+form.employee+'人</td></tr>',
+      '<tr><td>实际奖补额</td><td><strong>'+capped+'万</strong></td><td>保底'+low+'万</td></tr>'
+    ].join('')
+
+    // 建议
+    const tips = []
+    if (capped >= 50) tips.push('你的企业属于高优先支持对象，建议尽快启动申报流程')
+    if (form.level === '无' || form.level === '基础') tips.push('数字化基础薄弱=改造空间大=奖补优先级高，现在是申请的最佳时机')
+    if (form.scene !== '全都要') tips.push('建议先从' + form.scene + '场景切入，快速出效果后再扩展')
+    if (form.city === '东营' && form.industry === '化工') tips.push('东营对化工企业数字化转型有额外扶持政策，建议优先关注')
+    if (form.city === '济南' || form.city === '青岛') tips.push('济南/青岛作为首批试点城市，配套服务商多、申报流程成熟')
+
+    if (tips.length) {
+      document.getElementById('tipsCard').style.display = 'block'
+      document.getElementById('tipsList').innerHTML = tips.map(t =>
+        '<div class="tip-item"><span class="tip-dot">•</span>' + t + '</div>'
+      ).join('')
+    }
+
+    // 下一步
+    const steps = [
+      '联系淘景数科获取详细申报方案',
+      '安排免费工厂数字化诊断',
+      '准备申报材料提交工信局',
+      '奖补资金到账后启动改造'
+    ]
+    document.getElementById('nextSteps').innerHTML = steps.map((s, i) =>
+      '<div class="step-item"><span class="step-num">' + (i+1) + '</span><span class="step-text">' + s + '</span></div>'
+    ).join('')
+
+  }, 500)
+}
+
+/* ===== 重置 ===== */
 function resetForm() {
-  document.getElementById('stepForm').classList.remove('hidden')
-  document.getElementById('stepResult').classList.add('hidden')
+  document.getElementById('formPage').style.display = 'block'
+  document.getElementById('submitBtn').style.display = 'block'
+  document.getElementById('resultPage').style.display = 'none'
+  document.getElementById('aboutPage').style.display = 'none'
+  document.getElementById('app').scrollIntoView({ behavior: 'smooth' })
   form = { city: '', employee: '', industry: '', level: '', scene: '' }
   document.getElementById('submitBtn').disabled = true
   document.getElementById('city').value = ''
   document.querySelectorAll('.option').forEach(o => o.classList.remove('selected'))
+  document.getElementById('navCalc').classList.add('active')
+  document.getElementById('navAbout').classList.remove('active')
 }
 
+/* ===== 页面切换 ===== */
 function showForm() {
-  resetForm()
+  if (document.getElementById('resultPage').style.display === 'block') return resetForm()
+  document.getElementById('formPage').style.display = 'block'
+  document.getElementById('submitBtn').style.display = 'block'
+  document.getElementById('resultPage').style.display = 'none'
   document.getElementById('aboutPage').style.display = 'none'
+  document.getElementById('navCalc').classList.add('active')
+  document.getElementById('navAbout').classList.remove('active')
 }
-
 function showAbout() {
-  document.getElementById('stepForm').classList.add('hidden')
-  document.getElementById('stepResult').classList.add('hidden')
+  document.getElementById('formPage').style.display = 'none'
+  document.getElementById('submitBtn').style.display = 'none'
+  document.getElementById('resultPage').style.display = 'none'
   document.getElementById('aboutPage').style.display = 'block'
+  document.getElementById('app').scrollIntoView({ behavior: 'smooth' })
+  document.getElementById('navCalc').classList.remove('active')
+  document.getElementById('navAbout').classList.add('active')
 }
 
-document.getElementById('submitBtn').addEventListener('click', calc)
+/* ===== Toast ===== */
+function showToast(msg) {
+  const el = document.getElementById('toast')
+  el.textContent = msg
+  el.classList.add('show')
+  setTimeout(() => el.classList.remove('show'), 2000)
+}
+
+/* ===== Loading ===== */
+function showLoading() { document.getElementById('loading').classList.add('active') }
+function hideLoading() { document.getElementById('loading').classList.remove('active') }
+
+/* ===== 启动 ===== */
 initOptions()
 </script>
 </body>
