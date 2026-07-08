@@ -777,6 +777,9 @@ function showToast(msg) {
 function showLoading() { document.getElementById('loading').classList.add('active') }
 function hideLoading() { document.getElementById('loading').classList.remove('active') }
 
+/* ===== 绑定按钮事件 ===== */
+document.getElementById('submitBtn').addEventListener('click', calc)
+
 /* ===== 启动 ===== */
 initOptions()
 </script>
