@@ -77,14 +77,15 @@ Page({
     // 奖补估算 ≈ base * 行业系数 * 数转水平系数 + 员工规模补贴
     const estimate = Math.round(base * industryMul * levelMul * 0.5 + empBonus)
     const capped = Math.min(estimate, rule.baseMax + empBonus)
-    const selfPay = Math.max(1, Math.round(sceneCost * 0.5 - capped * (sceneCost / 50)))
+    const subsidy = Math.min(Math.round(sceneCost * 0.4), capped)
+    const selfPay = sceneCost - subsidy
 
     const resultData = {
       city: f.city,
       estimateHigh: capped,
       estimateLow: Math.round(capped * 0.6),
       sceneCost: sceneCost,
-      selfPay: Math.max(0, selfPay),
+      selfPay: selfPay,
       date: new Date().toLocaleDateString('zh-CN'),
       tips: [],
       nextSteps: [],
@@ -98,7 +99,7 @@ Page({
     // 添加奖补攻略PDF领取钩子
     resultData.leadCapture = {
       show: true,
-      message: `你预计可申领 ${capped}万 奖补资金，实际支付不到 ${Math.max(0, selfPay)}万`,
+      message: `你预计可申领 ${capped}万 奖补资金，项目实际自付约 ${selfPay}万（补贴后）`,
     }
 
     wx.setStorageSync('subsidy_result', resultData)

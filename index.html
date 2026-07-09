@@ -672,7 +672,6 @@ function calc() {
     const sc = SCENE_COST[form.scene] || 10
     const est = Math.round(rule.max * ib * lm * 0.5 + empExtra)
     const capped = Math.min(est, rule.max + empExtra)
-    const selfPay = Math.max(0, Math.round(sc * 0.5 - capped * (sc / 50)))
     const low = Math.round(capped * 0.6)
 
     hideLoading()
@@ -693,12 +692,14 @@ function calc() {
     const indFactor = (ib * 100).toFixed(0) + '%'
     const levelFactor = (lm * 100).toFixed(0) + '%'
     const empNote = empExtra > 0 ? '+'+empExtra+'万' : '无额外补贴'
+    const subsidy = Math.min(Math.round(sc * 0.4), capped)
+    const selfPay = sc - subsidy
+    const subsidyNote = subsidy < Math.round(sc * 0.4) ? '（已达城市上限）' : '（按项目40%估算）'
     breakdownBody.innerHTML = [
-      '<tr><td>基础奖补额</td><td>'+rule.max+'万</td><td>'+form.city+'最高奖补额度</td></tr>',
-      '<tr><td>行业系数</td><td>'+indFactor+'</td><td>'+form.industry+'行业调整</td></tr>',
-      '<tr><td>数字化水平系数</td><td>'+levelFactor+'</td><td>当前：'+form.level+'</td></tr>',
-      '<tr><td>员工规模补贴</td><td>'+empNote+'</td><td>'+form.employee+'人</td></tr>',
-      '<tr><td>实际奖补额</td><td><strong>'+capped+'万</strong></td><td>保底'+low+'万</td></tr>'
+      '<tr><td>项目改造费用</td><td>'+sc+'万</td><td>你选择的改造场景</td></tr>',
+      '<tr><td>最高可获奖补</td><td>'+capped+'万</td><td>'+form.city+'市政策上限</td></tr>',
+      '<tr><td>本次预估奖补</td><td>'+subsidy+'万'+subsidyNote+'</td><td>项目费用×40%与上限取小</td></tr>',
+      '<tr><td>企业实际自付</td><td style="color:#17B29F;font-weight:700;"><strong>约'+selfPay+'万</strong></td><td>改造费用-奖补</td></tr>'
     ].join('')
 
     // 建议
