@@ -1,70 +1,229 @@
-<navigation-bar title="奖补自测" back="{{false}}" color="white" background="#17B29F" />
+<wxs module="utils">
+module.exports = {
+  isItemVisible: function(item, checkAnswers) {
+    if (!item.condition) return true
+    return checkAnswers[item.condition.key] === item.condition.value
+  }
+}
+</wxs>
+
 <scroll-view class="container" scroll-y>
-  <view class="card">
-    <view class="page-title">你能拿多少奖补？</view>
-    <view class="page-desc">填几个基本信息，免费测算山东省各城市的中小企业数字化转型奖补金额。全程1分钟，不留手机号也能算。</view>
-    
-    <view class="input-group">
-      <label>你公司在哪个城市？</label>
-      <picker bindchange="onCityChange" mode="selector" range="{{cities}}">
-        <view class="picker-box {{form.city ? 'filled' : ''}}">
-          {{form.city || '请选择城市'}}
+  <!-- ===================== 步骤1：选择城市 ===================== -->
+  <block wx:if="{{step === 1}}">
+    <view class="card">
+      <view class="page-title">数转奖补自测 v3.0</view>
+      <view class="page-desc">先选城市，再做自检，最后算奖补。<br/>每城市检查项不同，贴合本市最新政策要求。</view>
+
+      <!-- 步骤指示器 -->
+      <view class="step-indicator">
+        <view class="step-dot active">1</view>
+        <view class="step-line"></view>
+        <view class="step-dot">2</view>
+        <view class="step-line"></view>
+        <view class="step-dot">3</view>
+        <view class="step-line"></view>
+        <view class="step-dot">4</view>
+      </view>
+
+      <view class="input-group" style="margin-top:40rpx;">
+        <label>你公司在哪个城市？</label>
+        <picker bindchange="onCityChange" mode="selector" range="{{cities}}">
+          <view class="picker-box {{selectedCity ? 'filled' : ''}}">
+            {{selectedCity || '请选择城市（山东10市）'}}
+          </view>
+        </picker>
+        <view class="picker-tip">山东10市已支持，其他省份陆续开放</view>
+      </view>
+    </view>
+
+    <!-- 城市政策说明卡片 -->
+    <view class="city-intro">
+      <view class="city-intro-title">📍 为什么先选城市？</view>
+      <view class="city-intro-text">每个城市的数转奖补政策不同：</view>
+      <view class="city-intro-list">
+        <text>• 申报门槛不同（规上要求、环保要求等）</text>
+        <text>• 行业系数不同（化工/食品/机械各有侧重）</text>
+        <text>• 申报时间不同（有的已截止，有的刚开放）</text>
+        <text>• 特殊要求不同（化工园区、HACCP认证等）</text>
+      </view>
+    </view>
+
+    <view class="city-grid">
+      <view class="city-tag {{selectedCity === '济南' ? 'selected' : ''}}" catchtap="onCityTap" data-city="济南">济南</view>
+      <view class="city-tag {{selectedCity === '青岛' ? 'selected' : ''}}" catchtap="onCityTap" data-city="青岛">青岛</view>
+      <view class="city-tag {{selectedCity === '烟台' ? 'selected' : ''}}" catchtap="onCityTap" data-city="烟台">烟台</view>
+      <view class="city-tag {{selectedCity === '潍坊' ? 'selected' : ''}}" catchtap="onCityTap" data-city="潍坊">潍坊</view>
+      <view class="city-tag {{selectedCity === '淄博' ? 'selected' : ''}}" catchtap="onCityTap" data-city="淄博">淄博</view>
+      <view class="city-tag {{selectedCity === '济宁' ? 'selected' : ''}}" catchtap="onCityTap" data-city="济宁">济宁</view>
+      <view class="city-tag highlight {{selectedCity === '东营' ? 'selected' : ''}}" catchtap="onCityTap" data-city="东营">东营</view>
+      <view class="city-tag {{selectedCity === '临沂' ? 'selected' : ''}}" catchtap="onCityTap" data-city="临沂">临沂</view>
+      <view class="city-tag {{selectedCity === '威海' ? 'selected' : ''}}" catchtap="onCityTap" data-city="威海">威海</view>
+      <view class="city-tag {{selectedCity === '泰安' ? 'selected' : ''}}" catchtap="onCityTap" data-city="泰安">泰安</view>
+    </view>
+
+    <view class="city-note-box">
+      <text>🏭 制造业企业 | 🔒 信用纳税无不良 | 🌿 环保安全达标 | 🏢 合法注册经营</text>
+    </view>
+  </block>
+
+  <!-- ===================== 步骤2：自检评估 ===================== -->
+  <block wx:if="{{step === 2}}">
+    <view class="card">
+      <view class="page-title">{{selectedCity}}</view>
+      <view class="page-desc">申报条件自检。全部通过才能申领奖补。<text class="red">红色×为必过项</text>，绿色✓为选填加分项。</view>
+
+      <!-- 步骤指示器 -->
+      <view class="step-indicator">
+        <view class="step-dot done">✓</view>
+        <view class="step-line active"></view>
+        <view class="step-dot active">2</view>
+        <view class="step-line"></view>
+        <view class="step-dot">3</view>
+        <view class="step-line"></view>
+        <view class="step-dot">4</view>
+      </view>
+    </view>
+
+    <!-- 自检项目列表 -->
+    <view class="check-list">
+      <view
+        wx:for="{{checkItems}}"
+        wx:key="key"
+        wx:if="{{utils.isItemVisible(item, checkAnswers)}}"
+        class="check-item {{checkStatus[item.key] === 'pass' ? 'pass' : ''}} {{checkStatus[item.key] === 'fail' ? 'fail' : ''}}"
+      >
+        <view class="check-item-header">
+          <view class="check-label">
+            <text class="{{item.type === 'required' ? 'required-dot' : 'optional-dot'}}"></text>
+            {{item.label}}
+            <text class="type-tag {{item.type === 'required' ? 'tag-required' : 'tag-optional'}}">{{item.type === 'required' ? '必填' : '选填'}}</text>
+          </view>
         </view>
-      </picker>
-    </view>
-
-    <view class="input-group">
-      <label>公司有多少员工？</label>
-      <view class="radio-group">
-        <view 
-          wx:for="{{employeeOptions}}"
-          wx:key="value"
-          class="radio-label {{form.employee === item.value ? 'selected' : ''}}"
-          bindtap="onSelect" data-field="employee" data-value="{{item.value}}"
-        >{{item.label}}</view>
+        <view class="check-tip">{{item.tip}}</view>
+        <view class="check-options">
+          <view
+            wx:for="{{item.options}}"
+            wx:key="value"
+            wx:for-item="opt"
+            class="check-option-btn {{checkAnswers[item.key] === opt.value ? 'selected' : ''}} {{checkStatus[item.key] === 'pass' && checkAnswers[item.key] === opt.value ? 'opt-pass' : ''}} {{checkStatus[item.key] === 'fail' && checkAnswers[item.key] === opt.value ? 'opt-fail' : ''}}"
+            catchtap="onCheckItemSelect"
+            data-key="{{item.key}}"
+            data-value="{{opt.value}}"
+          >{{opt.text}}</view>
+        </view>
       </view>
     </view>
 
-    <view class="input-group">
-      <label>主要属于哪个行业？</label>
-      <view class="radio-group">
-        <view 
-          wx:for="{{industryOptions}}"
-          wx:key="value"
-          class="radio-label {{form.industry === item.value ? 'selected' : ''}}"
-          bindtap="onSelect" data-field="industry" data-value="{{item.value}}"
-        >{{item.label}}</view>
+    <!-- 自检结果 -->
+    <view wx:if="{{checkPassed !== null}}" class="check-result {{checkPassed ? 'result-pass' : 'result-fail'}}">
+      <block wx:if="{{checkPassed}}">
+        <view class="result-icon pass-icon">✓</view>
+        <view class="result-title">自检通过！</view>
+        <view class="result-desc">你的企业基本符合{{selectedCity}}数转奖补申报条件，可以继续测算奖补金额。</view>
+        <button class="btn-primary check-submit-btn" bindtap="onContinueToForm">继续填写基础信息 →</button>
+      </block>
+      <block wx:else>
+        <view class="result-icon fail-icon">✗</view>
+        <view class="result-title">暂不符合申报条件</view>
+        <view class="result-desc">你的企业在以下方面需要先完成整改，整改后仍可申报：</view>
+        <view class="fail-reasons">
+          <view wx:for="{{disqualifyReasons}}" wx:key="label" class="fail-reason-item">
+            <text class="fail-reason-label">{{item.label}}</text>
+            <text class="fail-reason-tip">{{item.tip}}</text>
+          </view>
+        </view>
+        <button class="btn-secondary" open-type="contact">联系顾问协助整改 →</button>
+        <view class="fail-note">💡 提示：{{selectedCity}}{{cityNote}}</view>
+      </block>
+    </view>
+
+    <view wx:if="{{checkPassed === null}}" style="padding: 32rpx 0 60rpx 0;">
+      <button class="btn-primary check-submit-btn" bindtap="onCheckSubmit">提交自检结果</button>
+    </view>
+
+    <!-- 城市政策备注 -->
+    <view class="city-note-box" wx:if="{{cityNote}}">
+      <text>💡 {{cityNote}}</text>
+    </view>
+
+    <!-- 返回重新选城市 -->
+    <view class="back-link" bindtap="onBackToStep1">← 重新选择城市</view>
+  </block>
+
+  <!-- ===================== 步骤3：基础信息 ===================== -->
+  <block wx:if="{{step === 3}}">
+    <view class="card">
+      <view class="page-title">基础信息</view>
+      <view class="page-desc">{{selectedCity}} · 自检已通过 · 填写基本信息完成奖补测算</view>
+
+      <!-- 步骤指示器 -->
+      <view class="step-indicator">
+        <view class="step-dot done">✓</view>
+        <view class="step-line active"></view>
+        <view class="step-dot done">✓</view>
+        <view class="step-line active"></view>
+        <view class="step-dot active">3</view>
+        <view class="step-line"></view>
+        <view class="step-dot">4</view>
       </view>
     </view>
 
-    <view class="input-group">
-      <label>目前信息化到什么程度？</label>
-      <view class="radio-group">
-        <view 
-          wx:for="{{levelOptions}}"
-          wx:key="value"
-          class="radio-label {{form.level === item.value ? 'selected' : ''}}"
-          bindtap="onSelect" data-field="level" data-value="{{item.value}}"
-        >{{item.label}}</view>
+    <view class="card">
+      <view class="input-group">
+        <label>公司有多少员工？</label>
+        <view class="radio-group">
+          <view
+            wx:for="{{employeeOptions}}"
+            wx:key="value"
+            class="radio-label {{form.employee === item.value ? 'selected' : ''}}"
+            catchtap="onSelect" data-field="employee" data-value="{{item.value}}"
+          >{{item.label}}</view>
+        </view>
+      </view>
+
+      <view class="input-group">
+        <label>主要属于哪个行业？</label>
+        <view class="radio-group">
+          <view
+            wx:for="{{industryOptions}}"
+            wx:key="value"
+            class="radio-label {{form.industry === item.value ? 'selected' : ''}}"
+            catchtap="onSelect" data-field="industry" data-value="{{item.value}}"
+          >{{item.label}}</view>
+        </view>
+      </view>
+
+      <view class="input-group">
+        <label>目前信息化到什么程度？</label>
+        <view class="radio-group">
+          <view
+            wx:for="{{levelOptions}}"
+            wx:key="value"
+            class="radio-label {{form.level === item.value ? 'selected' : ''}}"
+            catchtap="onSelect" data-field="level" data-value="{{item.value}}"
+          >{{item.label}}</view>
+        </view>
+      </view>
+
+      <view class="input-group">
+        <label>想从哪个场景开始？</label>
+        <view class="radio-group" style="flex-wrap: wrap;">
+          <view
+            wx:for="{{sceneOptions}}"
+            wx:key="value"
+            class="radio-label scene-label {{form.scene === item.value ? 'selected' : ''}}"
+            catchtap="onSelect" data-field="scene" data-value="{{item.value}}"
+          >{{item.label}}</view>
+        </view>
       </view>
     </view>
 
-    <view class="input-group">
-      <label>想从哪个场景开始？</label>
-      <view class="radio-group" style="flex-wrap: wrap;">
-        <view 
-          wx:for="{{sceneOptions}}"
-          wx:key="value"
-          class="radio-label {{form.scene === item.value ? 'selected' : ''}}"
-          bindtap="onSelect" data-field="scene" data-value="{{item.value}}"
-        >{{item.label}}</view>
-      </view>
+    <view style="padding: 0 0 60rpx 0;">
+      <button class="btn-primary" disabled="{{!canSubmit}}" loading="{{submitting}}" bindtap="onFormSubmit">
+        {{submitting ? '测算中...' : '立即测算奖补金额'}}
+      </button>
     </view>
-  </view>
 
-  <view style="padding: 0 0 40px 0;">
-    <button class="btn-primary" disabled="{{!canSubmit}}" bindtap="onSubmit" loading="{{submitting}}">
-      {{submitting ? '测算中...' : '立即测算奖补金额'}}
-    </button>
-  </view>
+    <view class="back-link" bindtap="onBackToStep2">← 重新自检</view>
+  </block>
 </scroll-view>

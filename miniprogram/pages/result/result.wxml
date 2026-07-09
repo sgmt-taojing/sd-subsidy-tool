@@ -1,51 +1,101 @@
-<navigation-bar title="测算结果" color="white" background="#17B29F" />
 <scroll-view class="container" scroll-y>
-  <view class="result-hero">
-    <view class="result-label">你预计可申领的奖补</view>
-    <view class="result-amount">
-      <text class="amount-num">{{result.estimateHigh}}</text>
-      <text class="amount-unit">万元</text>
-    </view>
-    <view class="result-range">预估范围：{{result.estimateLow}} - {{result.estimateHigh}}万元</view>
+  <!-- 顶部结果卡 -->
+  <view class="result-hero {{result.checkPassed ? 'pass' : ''}}">
+    <view class="hero-city">{{result.city}}</view>
+    <view class="hero-subtitle">{{result.checkPassed ? '✅ 自检通过 · 符合申报条件' : '⏳ 自检结果'}}</view>
   </view>
 
-  <view class="card" style="margin-top: 20px;">
-    <view class="section-title">📋 你的投入估算</view>
-    <view class="info-row">
-      <text class="info-label">改造场景</text>
-      <text class="info-value">{{result.sceneCost}}万元起</text>
+  <!-- 测算结果卡 -->
+  <view class="card result-card">
+    <view class="card-header">💰 奖补估算结果</view>
+
+    <view class="amount-row main-amount">
+      <text class="amount-label">预计可申领奖补</text>
+      <view class="amount-value">
+        <text class="amount-num">{{result.subsidy}}</text>
+        <text class="amount-unit">万元</text>
+      </view>
     </view>
-    <view class="info-row">
-      <text class="info-label">奖补抵后净支出</text>
-      <text class="info-value highlight">约{{result.selfPay}}万元</text>
+
+    <view class="breakdown-table">
+      <view class="breakdown-row">
+        <text class="bd-label">项目场景费用</text>
+        <text class="bd-value">{{result.sceneCost}}万元</text>
+      </view>
+      <view class="breakdown-row highlight">
+        <text class="bd-label">本次预估奖补 <text class="percent-tag">{{subsidyPercent}}%</text></text>
+        <text class="bd-value primary">≈ {{result.subsidy}}万元</text>
+      </view>
+      <view class="breakdown-row">
+        <text class="bd-label">最高奖补上限</text>
+        <text class="bd-value muted">{{result.estimateHigh}}万元</text>
+      </view>
+      <view class="breakdown-row final">
+        <text class="bd-label">企业实际自付</text>
+        <text class="bd-value danger">≈ {{result.sceneCost - result.subsidy}}万元</text>
+      </view>
     </view>
-    <view class="info-row">
-      <text class="info-label">所在城市</text>
-      <text class="info-value">{{result.city}}</text>
+
+    <view class="scope-note">
+      估算区间：{{result.estimateLow}}万 ~ {{result.estimateHigh}}万元（最终以{{result.city}}工信局审批为准）
     </view>
   </view>
 
-  <view class="card" wx:if="{{result.tips.length > 0}}">
-    <view class="section-title">💡 建议</view>
-    <view wx:for="{{result.tips}}" wx:key="index" class="tip-item">• {{item}}</view>
+  <!-- 城市政策说明 -->
+  <view class="card note-card" wx:if="{{result.cityNote}}">
+    <view class="note-title">📋 {{result.city}}政策要点</view>
+    <view class="note-text">{{result.cityNote}}</view>
   </view>
 
-  <view class="card">
-    <view class="section-title">📌 下一步做什么</view>
-    <view wx:for="{{result.nextSteps}}" wx:key="index" class="step-item">
-      <view class="step-num">{{index + 1}}</view>
-      <text>{{item}}</text>
+  <!-- 自检通过项摘要 -->
+  <view class="card check-summary" wx:if="{{result.checkPassed}}">
+    <view class="card-header">✅ 自检通过项目</view>
+    <view class="check-summary-list">
+      <view
+        wx:for="{{result.checkItems}}"
+        wx:key="key"
+        class="check-summary-item"
+      >
+        <text class="cs-icon pass">✓</text>
+        <text class="cs-label">{{item.label}}</text>
+        <text class="cs-answer">{{item.label}}</text>
+      </view>
     </view>
   </view>
 
-  <view class="lead-capture">
-    <view class="lead-title">免费领《山东6市奖补政策指南》</view>
-    <view class="lead-desc">扫码添加淘景数科顾问，获取完整申报攻略</view>
-    <image src="/images/qr-code-placeholder.png" mode="widthFix" class="qr-code" />
-    <button class="btn-primary" bindtap="onContact">立即咨询</button>
+  <!-- 个性化建议 -->
+  <view class="card tips-card" wx:if="{{result.tips && result.tips.length > 0}}">
+    <view class="card-header">💡 个性化建议</view>
+    <view
+      wx:for="{{result.tips}}"
+      wx:key="index"
+      class="tip-item"
+    >{{item}}</view>
   </view>
 
-  <view style="text-align:center;padding:20px 0 40px;color:#999;font-size:24rpx;">
-    测算结果仅供参考，实际奖补金额以工信局审核为准
+  <!-- 后续步骤 -->
+  <view class="card next-steps-card" wx:if="{{result.nextSteps && result.nextSteps.length > 0}}">
+    <view class="card-header">🚀 下一步该怎么做</view>
+    <view
+      wx:for="{{result.nextSteps}}"
+      wx:key="index"
+      class="step-item"
+    >
+      <text class="step-num">{{index + 1}}</text>
+      <text class="step-text">{{item}}</text>
+    </view>
+  </view>
+
+  <!-- CTA按钮 -->
+  <view class="cta-section">
+    <button class="btn-primary btn-large" open-type="contact">联系顾问获取申报方案 →</button>
+    <button class="btn-share" open-type="share">分享给同事</button>
+  </view>
+
+  <!-- 底部信息 -->
+  <view class="footer-note">
+    <text>数据更新日期：{{result.date}}</text>
+    <text>最终奖补金额以{{result.city}}工信局审批为准</text>
+    <text>如有疑问，请联系淘景数科顾问</text>
   </view>
 </scroll-view>
