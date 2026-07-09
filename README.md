@@ -1,59 +1,36 @@
 # 山东数转奖补自测工具
 
-淘景数科 — 中小企业数字化转型奖补自测小程序
+**在线体验：** https://sgmt-taojing.github.io/sd-subsidy-tool/
 
-## 项目说明
+## 当前版本
 
-面向山东省6个重点城市（济南、青岛、烟台、淄博、济宁、东营）的中小制造企业，提供一个免费的奖补自测工具。用户填写几个基本信息，即可估算可获得的数字化转型奖补金额。
+**v3.0（2026-07-09）**：城市政策贴合版 · 企业自检评估
 
-## 目录结构
+- 四步流程：选城市 → 自检评估 → 填基础信息 → 奖补测算
+- 10城市各具专属检查项（税务/环保/安全/行业门槛/资质认证等）
+- 条件依赖：选"化工"才出现"化工园区认定"等关联问题
+- 未通过自检直接告知原因，不浪费后续时间
+
+## 历史版本
+
+- v2.0（2026-07-08）：优化版，仅基础奖补计算
+- v1.0（2026-07-08）：初版，基础功能
+
+## 文件说明
 
 ```
-├── miniprogram/          # 微信小程序源码
-│   ├── app.js
-│   ├── app.json
-│   ├── app.wxss
-│   ├── project.config.json
-│   ├── pages/
-│   │   ├── index/        # 自测表单页
-│   │   ├── result/       # 测算结果页
-│   │   └── about/        # 关于我们
-│   └── images/           # 图标资源
-│
-├── web-test/             # Web测试版（可直接浏览器运行）
-│   └── index.html        # 单页应用，零依赖
-│
-└── README.md
+v0.1/            ← 当前小程序开发目录
+  index.html     ← H5版（GitHub Pages 部署版本，与 v3.0 同步）
+  web-test/      ← 历史版本存档
+  miniprogram/   ← 微信小程序源码（需微信开发者工具打开）
 ```
 
-## 本地测试
+## GitHub
 
-### Web版（推荐，无需IDE）
+- 仓库：https://github.com/sgmt-taojing/sd-subsidy-tool
+- Pages：https://sgmt-taojing.github.io/sd-subsidy-tool/
 
-直接用浏览器打开 `web-test/index.html` 即可运行。
+## 技术栈
 
-### 微信小程序版
-
-1. 下载[微信开发者工具](https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html)
-2. 导入 `miniprogram/` 目录
-3. 修改 `project.config.json` 中的 `appid` 为你的小程序AppID
-4. 在开发者工具中预览
-
-## 部署到 GitHub Pages
-
-1. 将此仓库推送到 GitHub
-2. 在仓库 Settings → Pages 中选择 Source: "Deploy from a branch"
-3. 选择 main 分支，目录选择 `/web-test`
-4. 访问 `https://你的用户名.github.io/此仓库名/web-test/index.html`
-
-## 版本历史
-
-| 版本 | 日期 | 说明 |
-|------|------|------|
-| v0.1 | 2026-07-08 | 山东6市奖补自测（v0.1初始版） |
-| v1.0 | 2026-07-09 | 升级至山东10市（6试点+4扩展），测算公式修正（40%奖补比例），测算结果展示优化 |
-
-## 淘景数科
-
-制造业数字化转型"小快轻准"方案提供商
-官网：https://www.taojingshuke.com
+H5版：原生 HTML + CSS + JavaScript（零依赖，可直接浏览器打开）
+小程序版：微信小程序框架（需微信开发者工具）
