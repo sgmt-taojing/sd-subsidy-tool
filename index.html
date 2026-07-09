@@ -3,96 +3,79 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>山东数转奖补自测 v3.0 — 淘景数科</title>
+<title>数转奖补自测 v3.0 — 淘景数科</title>
 <style>
-/* ===== 品牌系统 ===== */
 :root {
-  --teal: #17B29F;
-  --teal-dark: #0E8A7A;
-  --teal-light: rgba(23,178,159,0.08);
-  --teal-bg: #E0F7F4;
-  --green: #39D98C;
-  --red: #E5575A;
-  --red-bg: #FFF0F0;
-  --yellow-bg: #FFFBE8;
-  --dark: #1D2129;
-  --gray: #4E5969;
-  --gray-light: #86909C;
-  --gray-100: #F2F3F5;
-  --border: #E8EAED;
+  --teal: #17B29F; --teal-dark: #0E8A7A;
+  --teal-bg: #E0F7F4; --teal-light: rgba(23,178,159,0.08);
+  --green: #39D98C; --red: #E5575A;
+  --red-bg: #FFF0F0; --yellow-bg: #FFFBE8;
+  --dark: #1D2129; --gray: #4E5969; --gray-light: #86909C;
+  --border: #E8EAED; --gray-100: #F2F3F5;
   --shadow: 0 2px 16px rgba(0,0,0,0.06);
-  --radius: 16px;
-  --radius-sm: 12px;
+  --radius: 16px; --radius-sm: 12px;
 }
 * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 body {
-  font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
-  background: #F2F4F7;
-  color: var(--dark);
-  min-height: 100vh;
-  max-width: 480px;
-  margin: 0 auto;
+  font-family: -apple-system,'PingFang SC','Microsoft YaHei',sans-serif;
+  background: #F2F4F7; color: var(--dark);
+  min-height: 100vh; max-width: 480px; margin: 0 auto;
 }
 
 /* ===== 头部 ===== */
 .header {
   background: linear-gradient(135deg, var(--teal), var(--green));
-  color: white;
-  padding: 40px 20px 28px;
-  text-align: center;
-  border-radius: 0 0 28px 28px;
-  position: sticky;
-  top: 0;
-  z-index: 10;
+  color: white; padding: 36px 20px 24px;
+  border-radius: 0 0 28px 28px; position: sticky; top: 0; z-index: 10;
 }
-.header-city { font-size: 14px; opacity: 0.85; margin-bottom: 4px; }
 .header h1 { font-size: 22px; font-weight: 700; }
-.header p { font-size: 13px; opacity: 0.85; margin-top: 6px; line-height: 1.6; }
+.header p { font-size: 13px; opacity: 0.85; margin-top: 4px; }
 
-/* ===== 步骤指示器 ===== */
+/* ===== 步骤条 ===== */
 .step-bar {
   display: flex; align-items: center; justify-content: center;
-  padding: 16px 20px 0;
-  gap: 0;
+  padding: 14px 20px 0; gap: 0;
 }
 .step-dot {
   width: 28px; height: 28px; border-radius: 50%;
   background: var(--gray-100); color: var(--gray-light);
   font-size: 13px; font-weight: 700;
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0; transition: all 0.3s;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  transition: all 0.3s;
 }
 .step-dot.active { background: var(--teal); color: white; }
 .step-dot.done { background: var(--teal); color: white; font-size: 15px; }
-.step-line { width: 36px; height: 3px; background: var(--gray-100); transition: all 0.3s; flex-shrink: 0; }
+.step-line { width: 36px; height: 3px; background: var(--gray-100); flex-shrink: 0; transition: all 0.3s; }
 .step-line.active { background: var(--teal); }
 
 /* ===== 页面容器 ===== */
-.page { padding: 16px 16px 40px; }
+.page { padding: 16px 16px 48px; }
 
-/* ===== 卡片 ===== */
+/* ===== 通用卡片 ===== */
 .card {
-  background: white;
-  border-radius: var(--radius);
-  padding: 28px 24px;
-  margin-bottom: 16px;
-  box-shadow: var(--shadow);
+  background: white; border-radius: var(--radius);
+  padding: 28px 22px; margin-bottom: 14px; box-shadow: var(--shadow);
 }
-.card-title {
-  font-size: 20px; font-weight: 700; color: var(--dark);
-  margin-bottom: 8px;
-}
-.card-desc { font-size: 14px; color: var(--gray); line-height: 1.7; margin-bottom: 24px; }
+.card-title { font-size: 20px; font-weight: 700; color: var(--dark); margin-bottom: 6px; }
+.card-desc { font-size: 14px; color: var(--gray); line-height: 1.7; }
 .card-desc .red { color: var(--red); font-weight: 600; }
 
-/* ===== 城市网格 ===== */
-.city-grid {
-  display: flex; flex-wrap: wrap; gap: 10px;
-}
-.city-btn {
-  padding: 10px 18px; border-radius: 10px;
-  font-size: 14px; cursor: pointer; transition: all 0.2s;
+/* ===== 省份选择 ===== */
+.province-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+.province-btn {
+  padding: 8px 16px; border-radius: 20px; font-size: 13px; cursor: pointer;
   background: white; border: 1px solid var(--border); color: var(--gray);
+  transition: all 0.2s;
+}
+.province-btn.selected { background: var(--teal); color: white; border-color: var(--teal); font-weight: 600; }
+.province-note { font-size: 12px; color: var(--gray-light); padding: 6px 0; }
+
+/* ===== 城市网格 ===== */
+.city-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+.city-btn {
+  padding: 10px 18px; border-radius: 10px; font-size: 14px;
+  cursor: pointer; transition: all 0.2s; background: white;
+  border: 1px solid var(--border); color: var(--gray);
 }
 .city-btn:hover { border-color: var(--teal); color: var(--teal); }
 .city-btn.selected { background: var(--teal); color: white; border-color: var(--teal); font-weight: 600; }
@@ -100,50 +83,18 @@ body {
 
 /* ===== 城市说明 ===== */
 .city-intro {
-  background: var(--teal-bg);
-  border-left: 4px solid var(--teal);
+  background: var(--teal-bg); border-left: 4px solid var(--teal);
   border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-  padding: 16px 20px;
-  margin-bottom: 16px;
-  font-size: 13px;
+  padding: 14px 18px; font-size: 13px;
 }
-.city-intro p { color: var(--gray); line-height: 1.7; }
 .city-intro strong { color: var(--teal); }
-
-/* ===== 表单 ===== */
-.form-group { margin-bottom: 24px; }
-.form-group label {
-  display: block; font-size: 15px; font-weight: 600; color: var(--dark);
-  margin-bottom: 10px;
-}
-.form-group select {
-  width: 100%; padding: 14px 16px;
-  border: 1px solid var(--border); border-radius: var(--radius-sm);
-  font-size: 15px; background: white; color: var(--gray);
-  -webkit-appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23888' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 14px center;
-}
-select.filled { color: var(--dark); border-color: var(--teal); }
-
-.options { display: flex; flex-wrap: wrap; gap: 8px; }
-.option {
-  padding: 9px 16px; border: 1px solid var(--border);
-  border-radius: var(--radius-sm); font-size: 13px; cursor: pointer;
-  transition: all 0.2s; background: white; color: var(--gray); line-height: 1.4;
-}
-.option:hover { border-color: var(--teal); color: var(--teal); }
-.option.selected { border-color: var(--teal); background: var(--teal-light); color: var(--teal); font-weight: 600; }
-.option.pass { border-color: var(--teal); background: var(--teal-bg); color: var(--teal); font-weight: 700; }
-.option.fail { border-color: var(--red); background: var(--red-bg); color: var(--red); font-weight: 700; }
-.option-label { display: block; font-size: 12px; color: var(--gray-light); margin-top: 2px; }
+.city-intro p { color: var(--gray); line-height: 1.7; margin-top: 4px; }
 
 /* ===== 自检项 ===== */
 .check-item {
-  background: white; border-radius: var(--radius); padding: 20px 18px;
-  margin-bottom: 12px; border: 2px solid var(--border); transition: all 0.2s;
-  box-shadow: 0 1px 8px rgba(0,0,0,0.04);
+  background: white; border-radius: var(--radius); padding: 18px 16px;
+  margin-bottom: 12px; border: 2px solid var(--border);
+  transition: border-color 0.2s;
 }
 .check-item.pass { border-color: var(--teal); background: #F8FFFE; }
 .check-item.fail { border-color: var(--red); background: #FFF8F8; }
@@ -151,60 +102,66 @@ select.filled { color: var(--dark); border-color: var(--teal); }
   font-size: 15px; font-weight: 600; color: var(--dark);
   display: flex; align-items: center; gap: 8px; margin-bottom: 6px;
 }
-.check-dot {
-  width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
-}
+.check-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
 .check-dot.required { background: var(--red); }
 .check-dot.optional { background: var(--teal); }
-.type-badge {
-  font-size: 11px; padding: 2px 8px; border-radius: 6px; font-weight: 400;
-}
+.type-badge { font-size: 11px; padding: 2px 8px; border-radius: 6px; font-weight: 400; margin-left: auto; }
 .type-badge.required { background: #FFE8E8; color: var(--red); }
 .type-badge.optional { background: var(--teal-bg); color: var(--teal); }
 .check-tip { font-size: 12px; color: var(--gray-light); margin-bottom: 12px; line-height: 1.5; }
 .check-options { display: flex; flex-wrap: wrap; gap: 8px; }
 
+/* ===== 选项按钮 ===== */
+.option {
+  padding: 9px 16px; border: 1px solid var(--border); border-radius: var(--radius-sm);
+  font-size: 13px; cursor: pointer; transition: all 0.2s; background: white;
+  color: var(--gray); line-height: 1.4;
+}
+.option:hover { border-color: var(--teal); color: var(--teal); }
+.option.selected-pass { border-color: var(--teal); background: var(--teal-bg); color: var(--teal); font-weight: 700; }
+.option.selected-fail { border-color: var(--red); background: var(--red-bg); color: var(--red); font-weight: 700; }
+.option.selected-pending { border-color: var(--teal); background: var(--teal-light); color: var(--teal); font-weight: 600; }
+
 /* ===== 自检结果 ===== */
 .check-result {
-  border-radius: var(--radius); padding: 32px 24px; margin-bottom: 16px;
-  text-align: center;
+  border-radius: var(--radius); padding: 28px 20px; margin-bottom: 14px; text-align: center;
 }
 .result-pass { background: linear-gradient(135deg, #E0F7F4, #D0F0E8); border: 2px solid var(--teal); }
 .result-fail { background: var(--red-bg); border: 2px solid var(--red); }
-.result-icon { font-size: 48px; margin-bottom: 12px; }
+.result-icon { font-size: 48px; margin-bottom: 10px; }
 .result-title { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
 .result-pass .result-title { color: var(--teal); }
 .result-fail .result-title { color: var(--red); }
 .result-desc { font-size: 14px; color: var(--gray); line-height: 1.7; }
-.fail-reasons { margin: 16px 0; text-align: left; }
+.fail-reasons { margin: 14px 0; text-align: left; }
 .fail-reason {
   background: white; border-radius: var(--radius-sm); padding: 14px 16px;
-  margin-bottom: 10px; border-left: 4px solid var(--red);
+  margin-bottom: 8px; border-left: 4px solid var(--red);
 }
 .fail-reason-title { font-size: 14px; font-weight: 600; color: var(--red); margin-bottom: 4px; }
 .fail-reason-tip { font-size: 12px; color: var(--gray-light); }
-.fail-note { font-size: 12px; color: var(--gray-light); margin-top: 12px; text-align: center; }
+
+/* ===== 表单 ===== */
+.form-group { margin-bottom: 24px; }
+.form-group label { display: block; font-size: 15px; font-weight: 600; color: var(--dark); margin-bottom: 10px; }
+.options { display: flex; flex-wrap: wrap; gap: 8px; }
 
 /* ===== 结果页 ===== */
 .result-hero {
   background: linear-gradient(135deg, var(--teal), var(--green));
   border-radius: var(--radius); padding: 40px 24px; text-align: center;
-  color: white; margin-bottom: 16px;
+  color: white; margin-bottom: 14px;
 }
-.hero-city { font-size: 28px; font-weight: 800; margin-bottom: 6px; }
-.hero-sub { font-size: 14px; opacity: 0.9; }
-.hero-amount {
-  font-size: 56px; font-weight: 800; color: white; margin: 20px 0 4px; line-height: 1;
-}
-.hero-amount-label { font-size: 14px; opacity: 0.85; }
+.hero-city { font-size: 26px; font-weight: 800; margin-bottom: 4px; }
+.hero-sub { font-size: 13px; opacity: 0.9; margin-bottom: 16px; }
+.hero-amount { font-size: 60px; font-weight: 800; line-height: 1; }
+.hero-unit { font-size: 24px; opacity: 0.9; margin-left: 4px; }
+.hero-label { font-size: 13px; opacity: 0.8; margin-top: 8px; }
 
-.result-table {
-  background: white; border-radius: var(--radius); overflow: hidden;
-  margin-bottom: 16px; box-shadow: var(--shadow);
-}
+.result-table { background: white; border-radius: var(--radius); overflow: hidden; margin-bottom: 14px; box-shadow: var(--shadow); }
 .table-row {
   display: flex; justify-content: space-between; align-items: center;
-  padding: 16px 20px; border-bottom: 1px solid var(--gray-100);
+  padding: 15px 20px; border-bottom: 1px solid var(--gray-100);
 }
 .table-row:last-child { border-bottom: none; }
 .table-row.highlight { background: var(--teal-bg); }
@@ -218,14 +175,10 @@ select.filled { color: var(--dark); border-color: var(--teal); }
   padding: 2px 8px; border-radius: 6px; font-weight: 600; margin-left: 6px;
 }
 
-.tips-card {
-  background: var(--yellow-bg);
-  border-left: 4px solid #F5A623;
-  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-}
-.tip-item { font-size: 13px; color: var(--gray); line-height: 1.7; padding: 8px 0; }
+.tips-card { background: var(--yellow-bg); border-left: 4px solid #F5A623; }
+.tip-item { font-size: 13px; color: var(--gray); line-height: 1.7; padding: 8px 0; border-bottom: 1px solid rgba(0,0,0,0.04); }
+.tip-item:last-child { border-bottom: none; }
 
-.next-card {}
 .next-item {
   display: flex; align-items: flex-start; gap: 14px;
   padding: 14px 0; border-bottom: 1px solid var(--gray-100);
@@ -242,23 +195,32 @@ select.filled { color: var(--dark); border-color: var(--teal); }
 .btn {
   display: block; width: 100%; padding: 16px 0; border: none;
   border-radius: var(--radius-sm); font-size: 16px; font-weight: 700;
-  cursor: pointer; transition: all 0.2s; text-align: center;
+  cursor: pointer; text-align: center; transition: all 0.2s;
 }
-.btn-primary {
-  background: var(--teal); color: white;
-  box-shadow: 0 4px 16px rgba(23,178,159,0.35);
-}
-.btn-primary:active { background: var(--teal-dark); transform: scale(0.98); }
+.btn-primary { background: var(--teal); color: white; box-shadow: 0 4px 16px rgba(23,178,159,0.35); }
+.btn-primary:active { background: var(--teal-dark); }
 .btn-primary:disabled { background: #C0D8D4; box-shadow: none; }
-.btn-secondary {
-  background: white; color: var(--teal); border: 2px solid var(--teal);
-}
+.btn-secondary { background: white; color: var(--teal); border: 2px solid var(--teal); }
 .btn-contact {
-  background: linear-gradient(135deg, var(--teal), var(--green));
-  color: white; font-size: 17px; padding: 18px 0;
-  box-shadow: 0 6px 20px rgba(23,178,159,0.4);
-  border-radius: var(--radius-sm); margin-bottom: 12px;
+  background: linear-gradient(135deg, var(--teal), var(--green)); color: white;
+  font-size: 17px; padding: 18px 0; border-radius: var(--radius-sm);
+  box-shadow: 0 6px 20px rgba(23,178,159,0.4); margin-bottom: 12px; border: none;
 }
+
+/* ===== 导航按钮组 ===== */
+.nav-btns { display: flex; flex-direction: column; gap: 10px; margin-top: 12px; }
+.back-btn-wrap { display: flex; justify-content: center; padding: 12px 0 4px; }
+.back-link { font-size: 13px; color: var(--gray-light); text-decoration: underline; cursor: pointer; }
+.back-link:hover { color: var(--teal); }
+
+/* ===== Toast ===== */
+#toast {
+  position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%);
+  background: rgba(0,0,0,0.75); color: white; padding: 12px 24px;
+  border-radius: 24px; font-size: 14px; z-index: 999;
+  transition: opacity 0.3s; opacity: 0; pointer-events: none;
+}
+#toast.show { opacity: 1; }
 
 /* ===== 隐藏 ===== */
 .hidden { display: none !important; }
@@ -266,88 +228,55 @@ select.filled { color: var(--dark); border-color: var(--teal); }
 /* ===== 底部 ===== */
 .footer { text-align: center; padding: 24px 16px 40px; }
 .footer p { font-size: 11px; color: var(--gray-light); margin-bottom: 4px; }
-
-/* ===== Toast ===== */
-#toast {
-  position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%);
-  background: rgba(0,0,0,0.8); color: white; padding: 12px 24px;
-  border-radius: 24px; font-size: 14px; z-index: 999;
-  transition: opacity 0.3s; opacity: 0; pointer-events: none;
-}
-#toast.show { opacity: 1; }
-
-/* ===== 关于页 ===== */
-.about-card {
-  background: white; border-radius: var(--radius); padding: 32px 24px;
-  box-shadow: var(--shadow); margin-bottom: 16px;
-}
-.about-logo { font-size: 32px; font-weight: 800; color: var(--teal); margin-bottom: 16px; }
-.about-text { font-size: 14px; color: var(--gray); line-height: 1.8; }
-.about-feature { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--gray-100); }
-.about-feature:last-child { border-bottom: none; }
-.about-feature-icon { font-size: 24px; }
-.about-feature-text { flex: 1; }
-.about-feature-text strong { font-size: 15px; color: var(--dark); display: block; margin-bottom: 2px; }
-.about-feature-text span { font-size: 13px; color: var(--gray-light); }
 </style>
 </head>
 <body>
 
 <!-- ===== 头部 ===== -->
-<div class="header" id="appHeader">
-  <div class="header-city" id="headerCity">山东10市</div>
-  <h1>数转奖补自测 v3.0</h1>
-  <p id="headerDesc">先选城市，再做自检，最后算奖补</p>
+<div class="header">
+  <h1 id="headerTitle">🏭 数转奖补自测 v3.0</h1>
+  <p id="headerDesc">先选省份城市，再做自检，最后算奖补</p>
 </div>
 
-<!-- ===== 步骤指示器 ===== -->
+<!-- ===== 步骤条 ===== -->
 <div class="step-bar" id="stepBar">
   <div class="step-dot active" id="dot1">1</div>
-  <div class="step-line" id="line1"></div>
+  <div class="step-line" id="line0"></div>
   <div class="step-dot" id="dot2">2</div>
-  <div class="step-line" id="line2"></div>
+  <div class="step-line" id="line1"></div>
   <div class="step-dot" id="dot3">3</div>
-  <div class="step-line" id="line3"></div>
+  <div class="step-line" id="line2"></div>
   <div class="step-dot" id="dot4">4</div>
 </div>
 
-<!-- ===== 页面容器 ===== -->
 <div class="page">
 
-  <!-- ====== 步骤1：选择城市 ====== -->
+  <!-- ====== 步骤1：省份+城市选择 ====== -->
   <div id="step1">
     <div class="card">
-      <div class="card-title">你在哪个城市？</div>
-      <div class="card-desc">每个城市政策不同，申报门槛也不同。<br/>选城市后才能看到对应的自检项目。</div>
+      <div class="card-title">选择你所在省份</div>
+      <div class="card-desc">各省份数转奖补政策差异大，先选省份再选城市，自动加载当地申报条件。</div>
     </div>
 
-    <div class="city-grid" id="cityGrid">
-      <div class="city-btn" onclick="selectCity('济南')">济南</div>
-      <div class="city-btn" onclick="selectCity('青岛')">青岛</div>
-      <div class="city-btn" onclick="selectCity('烟台')">烟台</div>
-      <div class="city-btn" onclick="selectCity('潍坊')">潍坊</div>
-      <div class="city-btn" onclick="selectCity('淄博')">淄博</div>
-      <div class="city-btn" onclick="selectCity('济宁')">济宁</div>
-      <div class="city-btn highlight" onclick="selectCity('东营')">东营</div>
-      <div class="city-btn" onclick="selectCity('临沂')">临沂</div>
-      <div class="city-btn" onclick="selectCity('威海')">威海</div>
-      <div class="city-btn" onclick="selectCity('泰安')">泰安</div>
+    <div class="province-grid" id="provinceGrid"></div>
+    <div class="city-intro" id="provinceNote"></div>
+
+    <div class="card" id="cityCard" style="display:none">
+      <div class="card-title" id="cityCardTitle">选择城市</div>
+      <div class="card-desc" id="cityCardDesc">选择对应城市后加载申报条件自检项。</div>
+      <div class="city-grid" id="cityGrid"></div>
     </div>
 
-    <div class="city-intro" id="cityIntro">
-      <p>📍 <strong>为什么先选城市？</strong></p>
-      <p>每个城市的数转奖补申报要求不同：</p>
-      <p>• 申报门槛不同（规上要求、环保要求等）</p>
-      <p>• 行业系数不同（化工/食品/机械各有侧重）</p>
-      <p>• 特殊要求不同（化工园区、HACCP认证等）</p>
+    <div class="city-intro" id="cityIntro" style="display:none;margin-top:0">
+      <p id="cityIntroText"></p>
     </div>
   </div>
 
   <!-- ====== 步骤2：自检评估 ====== -->
   <div id="step2" class="hidden">
     <div class="card">
-      <div class="card-title" id="checkCityTitle">城市 · 申报条件自检</div>
-      <div class="card-desc">全部<span class="red">红色必填项</span>通过才能申报奖补。绿色为选填加分项。</div>
+      <div class="card-title" id="checkTitle">城市 · 申报条件自检</div>
+      <div class="card-desc">全部<span class="red">红色必填项</span>选"是"才能通过申报。<br/>绿色为选填加分项，选填默认通过。</div>
     </div>
     <div id="checkList"></div>
 
@@ -359,73 +288,72 @@ select.filled { color: var(--dark); border-color: var(--teal); }
       </div>
       <div id="checkFailResult" class="check-result result-fail hidden">
         <div class="result-icon">❌</div>
-        <div class="result-title">暂不符合申报条件</div>
-        <div class="result-desc">以下项目需要先完成整改：</div>
+        <div class="result-title">部分条件未满足</div>
+        <div class="result-desc">以下必填项需要确认：</div>
         <div class="fail-reasons" id="failReasons"></div>
-        <div class="fail-note" id="failNote"></div>
+        <div class="fail-note" id="failNoteText" style="font-size:12px;color:var(--gray-light);margin-top:12px"></div>
       </div>
     </div>
 
     <button class="btn btn-primary" id="checkSubmitBtn" onclick="submitCheck()">提交自检结果</button>
-    <button class="btn btn-secondary" id="continueBtn" class="hidden" onclick="goToStep3()" style="margin-top:12px;display:none">继续填写基础信息 →</button>
 
-    <div class="city-intro" id="cityNoteBox" style="margin-top:16px;display:none">
-      <p id="cityNoteText"></p>
+    <div class="nav-btns" id="step2Nav">
+      <button class="btn btn-secondary" onclick="goToStep1()">← 重新选择城市</button>
     </div>
 
-    <div style="text-align:center;margin-top:20px">
-      <a href="#" onclick="goToStep1();return false" style="font-size:13px;color:#86909C;text-decoration:underline">← 重新选择城市</a>
+    <div class="city-intro" id="cityNoteBox" style="display:none;margin-top:14px">
+      <p id="cityNoteText"></p>
     </div>
   </div>
 
   <!-- ====== 步骤3：基础信息 ====== -->
   <div id="step3" class="hidden">
     <div class="card">
-      <div class="card-title" id="step3CityTitle">基础信息</div>
-      <div class="card-desc">自检已通过 · 填写基本信息完成奖补测算</div>
+      <div class="card-title" id="step3Title">基础信息</div>
+      <div class="card-desc" id="step3Desc">自检已通过 · 填写基本信息完成奖补测算</div>
     </div>
 
     <div class="card">
       <div class="form-group">
         <label>公司有多少员工？</label>
-        <div class="options" id="empOptions"></div>
+        <div class="options" id="empOpts"></div>
       </div>
       <div class="form-group">
         <label>主要属于哪个行业？</label>
-        <div class="options" id="indOptions"></div>
+        <div class="options" id="indOpts"></div>
       </div>
       <div class="form-group">
         <label>目前信息化到什么程度？</label>
-        <div class="options" id="lvlOptions"></div>
+        <div class="options" id="lvlOpts"></div>
       </div>
       <div class="form-group">
         <label>想从哪个场景开始？</label>
-        <div class="options" id="sceneOptions"></div>
+        <div class="options" id="sceneOpts"></div>
       </div>
     </div>
 
     <button class="btn btn-primary" id="calcBtn" onclick="doCalc()" disabled>立即测算奖补金额</button>
-    <div style="text-align:center;margin-top:16px">
-      <a href="#" onclick="goToStep2();return false" style="font-size:13px;color:#86909C;text-decoration:underline">← 重新自检</a>
-    </div>
+    <button class="btn btn-secondary" onclick="goToStep2()">← 重新自检</button>
   </div>
 
   <!-- ====== 步骤4：结果 ====== -->
   <div id="step4" class="hidden">
     <div class="result-hero">
       <div class="hero-city" id="resultCity"></div>
-      <div class="hero-sub">✅ 自检通过 · 符合申报条件</div>
-      <div class="hero-amount"><span id="resultAmount"></span><span style="font-size:28px">万</span></div>
-      <div class="hero-amount-label">预计可申领奖补金额</div>
+      <div class="hero-sub" id="resultSub"></div>
+      <div class="hero-amount">
+        <span id="resultAmount">—</span><span class="hero-unit">万</span>
+      </div>
+      <div class="hero-label">预计可申领奖补金额</div>
     </div>
 
     <div class="result-table">
       <div class="table-row">
         <span class="table-label">项目场景费用</span>
-        <span class="table-value" id="tSceneCost">—</span>
+        <span class="table-value" id="tCost">—</span>
       </div>
       <div class="table-row highlight">
-        <span class="table-label">本次预估奖补 <span class="percent-badge" id="tPercent">—</span></span>
+        <span class="table-label">本次预估奖补 <span class="percent-badge" id="tPct">—</span></span>
         <span class="table-value primary" id="tSubsidy">—</span>
       </div>
       <div class="table-row">
@@ -438,242 +366,351 @@ select.filled { color: var(--dark); border-color: var(--teal); }
       </div>
     </div>
 
-    <div class="city-intro" id="resultCityNote" style="display:none">
-      <p id="resultCityNoteText"></p>
+    <div class="city-intro" id="resultNoteBox" style="display:none;margin-bottom:14px">
+      <p id="resultNoteText"></p>
     </div>
 
-    <div class="card tips-card" id="tipsCard">
+    <div class="card tips-card" id="tipsCard" style="display:none">
       <div class="card-title">💡 个性化建议</div>
       <div id="tipsList"></div>
     </div>
 
-    <div class="card next-card">
+    <div class="card">
       <div class="card-title">🚀 下一步该怎么做</div>
-      <div id="nextStepsList"></div>
+      <div id="nextList"></div>
     </div>
 
     <button class="btn btn-contact" onclick="contactUs()">📞 联系顾问获取申报方案</button>
     <button class="btn btn-secondary" onclick="shareResult()">📤 分享给同事</button>
 
-    <div style="text-align:center;margin-top:24px">
-      <a href="#" onclick="resetAll();return false" style="font-size:13px;color:#86909C;text-decoration:underline">🔄 重新测算</a>
+    <div class="back-btn-wrap">
+      <span class="back-link" onclick="resetAll()">🔄 重新测算</span>
     </div>
 
     <div class="footer">
-      <p>数据更新日期：<span id="resultDate"></span></p>
+      <p>数据更新：<span id="resultDate"></span></p>
       <p>最终奖补金额以当地工信局审批为准</p>
     </div>
   </div>
 
-  <!-- ====== 关于我们 ====== -->
-  <div id="aboutPage" class="hidden">
-    <div class="about-card">
-      <div class="about-logo">🏭 淘景数科</div>
-      <div class="about-text">
-        专注制造业中小企业数字化转型，提供「小快轻准」解决方案：生产报工、设备联网、质量追溯三大产品线，助力企业快速完成数字化改造。
-      </div>
-    </div>
-    <div class="about-card">
-      <div class="about-feature">
-        <span class="about-feature-icon">🏛️</span>
-        <div class="about-feature-text">
-          <strong>深度政策解读</strong>
-          <span>山东10市政策实时更新，申报条件精准匹配</span>
-        </div>
-      </div>
-      <div class="about-feature">
-        <span class="about-feature-icon">💰</span>
-        <div class="about-feature-text">
-          <strong>奖补申请代办</strong>
-          <span>全程代办，用户省心，奖补资金快速到账</span>
-        </div>
-      </div>
-      <div class="about-feature">
-        <span class="about-feature-icon">🚀</span>
-        <div class="about-feature-text">
-          <strong>快速交付</strong>
-          <span>标准化产品，7天上线，30天完成数字化改造</span>
-        </div>
-      </div>
-      <div class="about-feature">
-        <span class="about-feature-icon">🤝</span>
-        <div class="about-feature-text">
-          <strong>持续服务</strong>
-          <span>项目交付后持续跟踪，确保奖补资金顺利到账</span>
-        </div>
-      </div>
-    </div>
-    <button class="btn btn-secondary" onclick="goHome()">← 返回首页</button>
-  </div>
-
 </div>
 
-<!-- ===== Toast ===== -->
 <div id="toast"></div>
 
 <script>
 // ================================================================
-// 城市自检配置（与小程序 v3.0 逻辑完全一致）
+// 省份+城市数据
+// ================================================================
+const PROVINCES = {
+  '山东省': {
+    cities: ['济南','青岛','烟台','潍坊','淄博','济宁','东营','临沂','威海','泰安'],
+    note: '山东是数转奖补政策最完善的省份之一，覆盖10个地级市，省市两级补贴可叠加。',
+    defaultMax: 80,
+  },
+  '江苏省': {
+    cities: ['南京','苏州','无锡','常州','南通','徐州','扬州','镇江'],
+    note: '江苏制造业强省，苏南是重点，数转补贴体系成熟，与山东政策差异较大。',
+    defaultMax: 100,
+  },
+  '浙江省': {
+    cities: ['杭州','宁波','温州','嘉兴','绍兴','金华','台州'],
+    note: '浙江民营经济活跃，宁波/温州制造业基础好，有独立的省级数转补贴通道。',
+    defaultMax: 100,
+  },
+  '广东省': {
+    cities: ['广州','深圳','佛山','东莞','中山','珠海','惠州'],
+    note: '广东制造业数字化程度最高，佛莞是重点，有大量智能制造专项资金。',
+    defaultMax: 120,
+  },
+  '河南省': {
+    cities: ['郑州','洛阳','新乡','许昌','南阳'],
+    note: '河南制造业承接转移，郑州/洛阳是重点，中部地区数转政策逐步完善。',
+    defaultMax: 60,
+  },
+  '四川省': {
+    cities: ['成都','绵阳','德阳','宜宾','南充'],
+    note: '成都制造业基础好，天府新区政策支持力度大，是西部数转重点城市。',
+    defaultMax: 70,
+  },
+  '其他省份': {
+    cities: ['联系顾问确认当地政策'],
+    note: '其他省份数转奖补政策各异，请联系淘景数科顾问获取最新政策。',
+    defaultMax: 50,
+    contactOnly: true,
+  },
+};
+
+// ================================================================
+// 各城市自检配置（山东全配置，其他省份简化）
 // ================================================================
 const SCENE_COST = {
   '生产报工': 8, '设备联网': 12, '质量追溯': 10, '全都要': 25, '全场景（深度）': 35,
 };
 const EMP_BONUS = { '1-50': 0, '51-200': 5, '201-500': 10, '500+': 15 };
 
-const CITY_CONFIG = {
+// 通用基础检查项（每个城市都有）
+function baseChecks() {
+  return [
+    { k:'tax', label:'依法纳税，无欠税记录', type:'required',
+      opts:[['是 ✓',true],['否 ✗',false]], tip:'近2年无欠税记录，税务记录是申报硬门槛' },
+    { k:'credit', label:'信用中国无黑名单记录', type:'required',
+      opts:[['是 ✓',true],['否 ✗',false]], tip:'失信被执行人等黑名单记录一票否决' },
+    { k:'safety', label:'近3年无重大安全事故', type:'required',
+      opts:[['是 ✓',true],['否 ✗',false]], tip:'发生重大安全事故的企业不得申报' },
+    { k:'law', label:'近3年无重大违法违规记录', type:'required',
+      opts:[['是 ✓',true],['否 ✗',false]], tip:'工商、质监、安监等重大处罚记录一票否决' },
+  ];
+}
+
+// 山东各城市特殊检查项
+const CITY_CHECKS = {
   '济南': {
-    note: '济南是山东省会，政策来源地，建议优先联系市工信局了解最新批次安排',
-    checks: [
-      { k:'tax', label:'依法纳税，无欠税记录', type:'required', opts:[['是 ✓',true],['否 ✗',false]], tip:'税务记录是申报门槛，近2年无欠税' },
-      { k:'credit', label:'信用中国无黑名单记录', type:'required', opts:[['是 ✓',true],['否 ✗',false]], tip:'失信企业无法申报' },
-      { k:'safety', label:'近3年无重大安全事故', type:'required', opts:[['是 ✓',true],['否 ✗',false]], tip:'安全生产一票否决' },
-      { k:'location', label:'注册地是否在高新区/经开区？', type:'required', opts:[['是 ✓',true],['否（非高新区也可申报）',false]], tip:'高新区优先，但不是硬性条件' },
-      { k:'budget', label:'是否有数字化转型预算？', type:'optional', opts:[['有，10万以上 ✓',true],['暂无预算',false]], tip:'有预算可加快启动' },
-      { k:'plan', label:'是否已有数转方案或计划？', type:'optional', opts:[['有 ✓',true],['暂无，我们可以帮您做',false]], tip:'暂无方案不影响申报' },
+    checks: [...baseChecks(),
+      { k:'location', label:'注册地是否在高新区/经开区？', type:'required',
+        opts:[['是 ✓',true],['否（也可申报）',false]], tip:'高新区/经开区企业优先，其他区域也可申报' },
+      { k:'budget', label:'是否有数转项目预算（10万以上）？', type:'optional',
+        opts:[['有 ✓',true],['暂无',false]], tip:'有预算的企业优先受理' },
     ],
     rule: { max:100, ind:{'机械制造':1.1,'食品加工':1.0,'化工':1.0,'电子':1.15,'纺织':0.95,'其他':1.0}, lvl:{'无':1.2,'基础':1.0,'部分':0.8,'较完善':0.6} },
+    note: '济南是山东省会，政策来源地，建议优先联系市工信局了解最新批次安排',
   },
   '青岛': {
-    note: '青岛政策开放度最高，工业互联网生态全国领先，已贯标两化融合的企业优先',
-    checks: [
-      { k:'tax', label:'依法纳税，无欠税记录', type:'required', opts:[['是 ✓',true],['否 ✗',false]], tip:'税务是硬门槛' },
-      { k:'credit', label:'信用中国无黑名单记录', type:'required', opts:[['是 ✓',true],['否 ✗',false]], tip:'失信企业一票否决' },
-      { k:'env', label:'近3年无重大环保处罚', type:'required', opts:[['是 ✓',true],['否 ✗',false]], tip:'环保处罚影响申报资格' },
-      { k:'iim', label:'是否已做两化融合管理体系贯标？', type:'optional', opts:[['已通过 ✓','done'],['未做（不影响申报）',false]], tip:'已贯标企业优先，但不是必须' },
-      { k:'internet', label:'是否有工业互联网平台使用计划？', type:'optional', opts:[['有 ✓',true],['暂无计划',false]], tip:'青岛工业互联网生态成熟，有计划加分' },
-      { k:'scale', label:'是否属于规上工业企业（年营收≥2000万）？', type:'required', opts:[['是 ✓',true],['否（暂不符合申报条件）',false]], tip:'规上企业是青岛申报的基本门槛' },
+    checks: [...baseChecks(),
+      { k:'env', label:'近3年无重大环保处罚', type:'required',
+        opts:[['是 ✓',true],['否 ✗',false]], tip:'青岛环保核查严格，重大处罚影响申报资格' },
+      { k:'iim', label:'是否已做两化融合管理体系贯标？', type:'optional',
+        opts:[['已通过贯标 ✓','done'],['未做（不影响申报）',false]], tip:'已贯标企业优先，但不是申报必须条件' },
+      { k:'scale', label:'是否属于规模以上工业企业（年营收≥2000万）？', type:'required',
+        opts:[['是 ✓',true],['否（暂不符合青岛申报条件）',false]], tip:'青岛规上企业是申报基础门槛，非规上可关注县级补贴' },
     ],
     rule: { max:100, ind:{'机械制造':1.0,'食品加工':0.95,'化工':1.05,'电子':1.2,'纺织':0.9,'其他':1.0}, lvl:{'无':1.2,'基础':1.0,'部分':0.8,'较完善':0.6} },
+    note: '青岛工业互联网生态全国领先，已贯标企业优先；非规上企业可关注青岛县域补贴政策',
   },
   '烟台': {
-    note: '烟台化工重镇，化工企业门槛高（需安全许可+产业升级审核），非化工企业机会更大',
-    checks: [
-      { k:'tax', label:'依法纳税，无欠税记录', type:'required', opts:[['是 ✓',true],['否 ✗',false]], tip:'税务硬门槛' },
-      { k:'credit', label:'信用中国无黑名单记录', type:'required', opts:[['是 ✓',true],['否 ✗',false]], tip:'失信一票否决' },
-      { k:'env', label:'近3年无重大环保处罚', type:'required', opts:[['是 ✓',true],['否 ✗',false]], tip:'烟台化工多，环保核查严格' },
-      { k:'safety', label:'近3年无重大安全事故', type:'required', opts:[['是 ✓',true],['否 ✗',false]], tip:'安全生产一票否决，尤其化工企业' },
-      { k:'chem', label:'是否为化工企业？', type:'required', opts:[['是化工',true],['否（非化工直接通过）',false]], tip:'化工企业需提供安全生产许可证' },
-      { k:'chemCert', label:'化工企业：是否有有效安全生产许可证？', type:'required', opts:[['有 ✓',true],['无（化工企业必须有）',false]], tip:'化工企业无安全生产许可证无法申报', cond:'chem', condVal:true },
+    checks: [...baseChecks(),
+      { k:'env', label:'近3年无重大环保处罚', type:'required',
+        opts:[['是 ✓',true],['否 ✗',false]], tip:'烟台化工占比高，环保核查严格' },
+      { k:'chem', label:'是否为化工/石化企业？', type:'required',
+        opts:[['是化工',true],['否（非化工企业）',false]], tip:'化工企业需提供安全生产许可证' },
+      { k:'chemCert', label:'化工企业：是否有有效安全生产许可证？', type:'required',
+        opts:[['有 ✓',true],['无（化工企业必须有）',false]], tip:'化工企业无安全生产许可证无法申报',
+        cond:'chem', condVal:true },
     ],
     rule: { max:80, ind:{'机械制造':1.15,'食品加工':1.0,'化工':1.2,'电子':1.0,'纺织':0.9,'其他':1.0}, lvl:{'无':1.15,'基础':1.0,'部分':0.85,'较完善':0.65} },
+    note: '烟台化工重镇，化工企业需安全许可+产业升级审核；非化工企业机会更大、门槛更低',
   },
   '潍坊': {
-    note: '潍坊制造业体量山东第一，规上企业多，竞争相对激烈，建议提前准备材料',
-    checks: [
-      { k:'tax', label:'依法纳税，无欠税记录', type:'required', opts:[['是 ✓',true],['否 ✗',false]], tip:'税务硬门槛' },
-      { k:'credit', label:'信用中国无黑名单记录', type:'required', opts:[['是 ✓',true],['否 ✗',false]], tip:'失信一票否决' },
-      { k:'scale', label:'是否属于规模以上工业企业（年营收≥2000万）？', type:'required', opts:[['是 ✓',true],['否 ✗',false]], tip:'潍坊规上企业是申报基础' },
-      { k:'plan', label:'是否有初步数字化转型方案或改造计划？', type:'optional', opts:[['有 ✓',true],['暂无（我们可以协助制定）',false]], tip:'有方案优先受理，但不是硬性条件' },
-      { k:'invest', label:'预计数转投入金额？', type:'optional', opts:[['10万以上 ✓','high'],['5-10万','mid'],['5万以下','low']], tip:'投入金额影响补贴额度' },
+    checks: [...baseChecks(),
+      { k:'scale', label:'是否属于规模以上工业企业（年营收≥2000万）？', type:'required',
+        opts:[['是 ✓',true],['否 ✗',false]], tip:'潍坊规上企业是申报基础；年营收2000万以下可关注县级补贴' },
+      { k:'plan', label:'是否有初步数转改造方案或计划？', type:'optional',
+        opts:[['有 ✓',true],['暂无（我们可以协助制定）',false]], tip:'有方案优先受理，但不是硬性条件' },
     ],
     rule: { max:80, ind:{'机械制造':1.1,'食品加工':1.0,'化工':1.15,'电子':1.0,'纺织':1.0,'其他':1.0}, lvl:{'无':1.2,'基础':1.0,'部分':0.8,'较完善':0.6} },
+    note: '潍坊制造业体量山东第一（规上企业超4000家），竞争相对激烈，建议提前准备材料',
   },
   '淄博': {
-    note: '淄博化工系数全省最高(×1.25)，但化工企业有额外环保门槛；陶瓷/建材需超低排放改造',
-    checks: [
-      { k:'tax', label:'依法纳税，无欠税记录', type:'required', opts:[['是 ✓',true],['否 ✗',false]], tip:'税务硬门槛' },
-      { k:'credit', label:'信用中国无黑名单记录', type:'required', opts:[['是 ✓',true],['否 ✗',false]], tip:'失信一票否决' },
-      { k:'env', label:'近3年无重大环保处罚', type:'required', opts:[['是 ✓',true],['否 ✗',false]], tip:'淄博陶瓷/化工多，环保是重点' },
-      { k:'industry', label:'属于哪个细分行业？', type:'required', opts:[['化工','chem'],['陶瓷/建材','ceramic'],['纺织','textile'],['其他制造业','other']], tip:'化工和建材行业有额外门槛' },
-      { k:'chemEnv', label:'化工企业：环保绩效评级是否B级及以上？', type:'required', opts:[['B级及以上 ✓',true],['C级或以下',false],['我不是化工',false]], tip:'淄博化工企业须达到B级以上环保绩效', cond:'industry', condVal:'chem' },
-      { k:'ceramicLow', label:'陶瓷/建材企业：是否完成超低排放改造？', type:'required', opts:[['已完成 ✓',true],['未完成或不了解',false],['我不是陶瓷/建材',false]], tip:'淄博建材企业须完成超低排放改造', cond:'industry', condVal:'ceramic' },
+    checks: [...baseChecks(),
+      { k:'env', label:'近3年无重大环保处罚', type:'required',
+        opts:[['是 ✓',true],['否 ✗',false]], tip:'淄博陶瓷/化工多，环保是重点审查项' },
+      { k:'industry', label:'属于哪个细分行业？', type:'required',
+        opts:[['化工/石化','chem'],['陶瓷/建材','ceramic'],['纺织','textile'],['其他制造业','other']], tip:'不同行业有不同附加条件' },
+      { k:'chemEnv', label:'化工企业：环保绩效评级是否B级及以上？', type:'required',
+        opts:[['B级及以上 ✓',true],['C级或以下',false],['我不是化工',false]],
+        tip:'淄博化工企业须达到B级以上环保绩效', cond:'industry', condVal:'chem' },
+      { k:'ceramicLow', label:'陶瓷/建材企业：是否完成超低排放改造？', type:'required',
+        opts:[['已完成 ✓',true],['未完成',false],['我不是陶瓷/建材',false]],
+        tip:'淄博建材企业须完成超低排放改造', cond:'industry', condVal:'ceramic' },
     ],
     rule: { max:60, ind:{'机械制造':1.0,'食品加工':0.95,'化工':1.25,'电子':1.0,'纺织':1.05,'其他':1.0}, lvl:{'无':1.1,'基础':1.0,'部分':0.85,'较完善':0.7} },
+    note: '淄博化工系数全省最高(×1.25)；化工企业需B级以上环保绩效，建材需超低排放改造',
   },
   '济宁': {
-    note: '济宁装备制造强项，机械行业系数高(×1.2)；竞争相对较小，建议提前联系工信局',
-    checks: [
-      { k:'tax', label:'依法纳税，无欠税记录', type:'required', opts:[['是 ✓',true],['否 ✗',false]], tip:'税务硬门槛' },
-      { k:'credit', label:'信用中国无黑名单记录', type:'required', opts:[['是 ✓',true],['否 ✗',false]], tip:'失信一票否决' },
-      { k:'rd', label:'企业是否有研发机构（研究所/实验室）？', type:'optional', opts:[['有 ✓',true],['暂无',false]], tip:'机械装备企业有研发机构优先，但不是硬性条件' },
-      { k:'assessment', label:'是否已做过济宁市智能制造能力成熟度评估？', type:'optional', opts:[['已做过（1-3级）✓',true],['未做过（不影响申报）',false]], tip:'已评估企业优先，但不是硬性条件' },
+    checks: [...baseChecks(),
+      { k:'rd', label:'企业是否有研发机构（研究所/实验室）？', type:'optional',
+        opts:[['有 ✓',true],['暂无',false]], tip:'机械装备企业有研发机构优先，但不是硬性条件' },
+      { k:'assessment', label:'是否做过济宁市智能制造能力成熟度评估？', type:'optional',
+        opts:[['已做过（1-3级）✓',true],['未做过（不影响申报）',false]], tip:'已评估企业优先受理' },
     ],
     rule: { max:50, ind:{'机械制造':1.2,'食品加工':1.1,'化工':1.0,'电子':1.0,'纺织':1.1,'其他':1.0}, lvl:{'无':1.1,'基础':1.0,'部分':0.9,'较完善':0.7} },
+    note: '济宁装备制造强项，机械行业系数高(×1.2)；竞争相对较小，建议提前联系工信局',
   },
   '东营': {
-    note: '东营化工天下，化工系数全省最高(×1.3)；但化工企业必须在园区+安全C级，硬门槛多；胜利油田生态是独特优势',
-    checks: [
-      { k:'tax', label:'依法纳税，无欠税记录', type:'required', opts:[['是 ✓',true],['否 ✗',false]], tip:'税务硬门槛' },
-      { k:'credit', label:'信用中国无黑名单记录', type:'required', opts:[['是 ✓',true],['否 ✗',false]], tip:'失信一票否决' },
-      { k:'env', label:'近3年无重大环保处罚', type:'required', opts:[['是 ✓',true],['否 ✗',false]], tip:'东营化工占主导，环保是重点审查项' },
-      { k:'safety', label:'近3年无重大安全事故', type:'required', opts:[['是 ✓',true],['否 ✗',false]], tip:'安全生产一票否决，尤其化工' },
-      { k:'industry', label:'属于哪个细分行业？', type:'required', opts:[['化工/石化','chem'],['石油装备','equip'],['其他制造业','other']], tip:'东营化工占工业80%+' },
-      { k:'chemPark', label:'化工企业：是否在经认定的化工园区内？', type:'required', opts:[['在园区内 ✓',true],['不在园区（无法申报）',false],['我不是化工',false]], tip:'东营化工企业必须在化工园区内，硬门槛', cond:'industry', condVal:'chem' },
-      { k:'safetyLevel', label:'化工企业：安全评级是否达到C级以上？', type:'required', opts:[['C级或以上 ✓',true],['D级（不合格）',false],['我不是化工',false]], tip:'化工企业安全评级必须达到C级', cond:'industry', condVal:'chem' },
+    checks: [...baseChecks(),
+      { k:'env', label:'近3年无重大环保处罚', type:'required',
+        opts:[['是 ✓',true],['否 ✗',false]], tip:'东营化工占主导，环保是重点审查项' },
+      { k:'industry', label:'属于哪个细分行业？', type:'required',
+        opts:[['化工/石化','chem'],['石油装备','equip'],['其他制造业','other']], tip:'东营化工占工业80%+，化工企业有额外门槛' },
+      { k:'chemPark', label:'化工企业：是否在经认定的化工园区内？', type:'required',
+        opts:[['在园区内 ✓',true],['不在园区（无法申报）',false],['我不是化工',false]],
+        tip:'东营化工企业必须在化工园区内，硬门槛', cond:'industry', condVal:'chem' },
+      { k:'safetyLevel', label:'化工企业：安全评级是否达到C级以上？', type:'required',
+        opts:[['C级或以上 ✓',true],['D级（不合格）',false],['我不是化工',false]],
+        tip:'化工企业安全评级必须达到C级', cond:'industry', condVal:'chem' },
     ],
     rule: { max:80, ind:{'机械制造':1.0,'食品加工':0.9,'化工':1.3,'电子':1.0,'纺织':0.85,'其他':1.0}, lvl:{'无':1.15,'基础':1.0,'部分':0.85,'较完善':0.65} },
+    note: '东营化工天下，化工系数全省最高(×1.3)；但化工企业必须在园区+安全C级，硬门槛多',
   },
   '临沂': {
-    note: '临沂食品系数最高(×1.15)，商贸活跃；Q4跟进城市，7-9月重点在试点城市',
-    checks: [
-      { k:'tax', label:'依法纳税，无欠税记录', type:'required', opts:[['是 ✓',true],['否 ✗',false]], tip:'税务硬门槛' },
-      { k:'credit', label:'信用中国无黑名单记录', type:'required', opts:[['是 ✓',true],['否 ✗',false]], tip:'失信一票否决' },
-      { k:'industry', label:'属于哪个细分行业？', type:'required', opts:[['食品加工','food'],['商贸/物流配套制造','commerce'],['其他制造业','other']], tip:'临沂食品/商贸发达' },
-      { k:'foodCert', label:'食品企业：是否持有有效SC生产许可证？', type:'required', opts:[['有 ✓',true],['无或过期',false],['我不是食品企业',false]], tip:'临沂食品加工企业多，SC证是硬门槛', cond:'industry', condVal:'food' },
-      { k:'foodSafety', label:'食品企业：近3年是否通过食品安全监督审核？', type:'required', opts:[['通过 ✓',true],['有违规记录',false],['我不是食品',false]], tip:'食品安全是临沂食品企业的核心审查点', cond:'industry', condVal:'food' },
+    checks: [...baseChecks(),
+      { k:'industry', label:'属于哪个细分行业？', type:'required',
+        opts:[['食品加工','food'],['商贸/物流配套制造','commerce'],['其他制造业','other']], tip:'临沂食品/商贸发达，食品企业有额外条件' },
+      { k:'foodCert', label:'食品企业：是否持有有效SC生产许可证？', type:'required',
+        opts:[['有 ✓',true],['无或过期',false],['我不是食品',false]],
+        tip:'临沂食品加工企业多，SC证是申报门槛', cond:'industry', condVal:'food' },
+      { k:'foodSafety', label:'食品企业：近3年是否通过食品安全监督审核？', type:'required',
+        opts:[['通过 ✓',true],['有违规记录',false],['我不是食品',false]],
+        tip:'食品安全是临沂食品企业核心审查点', cond:'industry', condVal:'food' },
     ],
     rule: { max:60, ind:{'机械制造':1.0,'食品加工':1.15,'化工':1.0,'电子':1.0,'纺织':1.0,'其他':1.0}, lvl:{'无':1.1,'基础':1.0,'部分':0.85,'较完善':0.65} },
+    note: '临沂食品系数最高(×1.15)，商贸活跃；Q4跟进城市',
   },
   '威海': {
-    note: '威海食品行业系数全省最高(×1.5)！出口导向，HACCP认证是特色要求',
-    checks: [
-      { k:'tax', label:'依法纳税，无欠税记录', type:'required', opts:[['是 ✓',true],['否 ✗',false]], tip:'税务硬门槛' },
-      { k:'credit', label:'信用中国无黑名单记录', type:'required', opts:[['是 ✓',true],['否 ✗',false]], tip:'失信一票否决' },
-      { k:'industry', label:'属于哪个细分行业？', type:'required', opts:[['食品加工','food'],['纺织/服装','textile'],['其他制造业','other']], tip:'威海食品/纺织出口导向明显' },
-      { k:'foodHaccp', label:'食品企业：是否建立HACCP质量管理体系？', type:'required', opts:[['已建立 ✓',true],['未建立',false],['我不是食品',false]], tip:'威海食品出口多，HACCP是行业特色要求', cond:'industry', condVal:'food' },
-      { k:'trace', label:'是否有质量追溯体系建设计划？', type:'optional', opts:[['有 ✓',true],['暂无',false]], tip:'威海食品出口要求质量追溯，有计划加分' },
+    checks: [...baseChecks(),
+      { k:'industry', label:'属于哪个细分行业？', type:'required',
+        opts:[['食品加工','food'],['纺织/服装','textile'],['其他制造业','other']], tip:'威海食品/纺织出口导向明显' },
+      { k:'foodHaccp', label:'食品企业：是否建立HACCP质量管理体系？', type:'required',
+        opts:[['已建立 ✓',true],['未建立',false],['我不是食品',false]],
+        tip:'威海食品出口多，HACCP是行业特色要求', cond:'industry', condVal:'food' },
+      { k:'trace', label:'是否有质量追溯体系建设计划？', type:'optional',
+        opts:[['有 ✓',true],['暂无',false]], tip:'威海食品出口要求质量追溯，有计划加分' },
     ],
     rule: { max:50, ind:{'机械制造':1.0,'食品加工':1.5,'化工':0.85,'电子':1.0,'纺织':1.2,'其他':1.0}, lvl:{'无':1.1,'基础':1.0,'部分':0.85,'较完善':0.65} },
+    note: '威海食品行业系数全省最高(×1.5)！出口导向，HACCP认证是特色要求',
   },
   '泰安': {
-    note: '泰安Q4跟进城市；机械装备是主攻方向，条件相对宽松',
-    checks: [
-      { k:'tax', label:'依法纳税，无欠税记录', type:'required', opts:[['是 ✓',true],['否 ✗',false]], tip:'税务硬门槛' },
-      { k:'credit', label:'信用中国无黑名单记录', type:'required', opts:[['是 ✓',true],['否 ✗',false]], tip:'失信一票否决' },
-      { k:'tech', label:'是否为高新技术企业？', type:'optional', opts:[['是 ✓',true],['否（不影响申报）',false]], tip:'泰安高新技术企业优先，但不是硬性条件' },
-      { k:'budget', label:'是否有智能化改造投入预算？', type:'optional', opts:[['有明确预算 ✓',true],['暂无（我们可以帮您规划）',false]], tip:'有预算的企业优先' },
+    checks: [...baseChecks(),
+      { k:'tech', label:'是否为高新技术企业？', type:'optional',
+        opts:[['是 ✓',true],['否（不影响申报）',false]], tip:'泰安高新技术企业优先，但不是硬性条件' },
+      { k:'budget', label:'是否有智能化改造投入预算？', type:'optional',
+        opts:[['有明确预算 ✓',true],['暂无（我们可以帮您规划）',false]], tip:'有预算的企业优先' },
     ],
     rule: { max:50, ind:{'机械制造':1.1,'食品加工':1.0,'化工':1.0,'电子':1.05,'纺织':1.0,'其他':1.0}, lvl:{'无':1.1,'基础':1.0,'部分':0.85,'较完善':0.65} },
+    note: '泰安Q4跟进城市；机械装备是主攻方向，条件相对宽松',
   },
 };
 
+// 通用行业奖补规则（非山东城市使用）
+function genericRule(province, city) {
+  const max = (PROVINCES[province] || {}).defaultMax || 80;
+  return {
+    max,
+    ind: {'机械制造':1.1,'食品加工':1.0,'化工':1.1,'电子':1.2,'纺织':1.0,'其他':1.0},
+    lvl: {'无':1.2,'基础':1.0,'部分':0.8,'较完善':0.6},
+    note: (PROVINCES[province] || {}).note || '请联系淘景数科顾问获取当地详细政策',
+  };
+}
+
 // ================================================================
-// 状态
+// 全局状态
 // ================================================================
+let currentProvince = '';
 let currentCity = '';
-let checkAnswers = {};
-let checkStatus = {};
+let currentChecks = [];     // 当前城市的检查项（含条件筛选后）
+let checkAnswers = {};      // 用户作答 { k: value }
+let checkStatus = {};       // 答题状态 { k: 'pass'|'fail'|'pending' }
 let checkPassed = null;
 let form = { employee:'', industry:'', level:'', scene:'' };
 
 // ================================================================
-// 步骤1：城市选择
+// 初始化：渲染省份选择
+// ================================================================
+function init() {
+  const grid = document.getElementById('provinceGrid');
+  Object.keys(PROVINCES).forEach(p => {
+    const btn = document.createElement('div');
+    btn.className = 'province-btn';
+    btn.textContent = p;
+    btn.onclick = () => selectProvince(p);
+    grid.appendChild(btn);
+  });
+  document.getElementById('provinceNote').innerHTML = '<p><strong>💡 如何选择省份？</strong></p><p>优先选择你公司注册地所在省份。每个省份政策不同，检查项也不同。如果不在列表中，选"其他省份"联系顾问。</p>';
+}
+
+// ================================================================
+// 步骤1：省份选择
+// ================================================================
+function selectProvince(province) {
+  currentProvince = province;
+  const cfg = PROVINCES[province];
+
+  // 更新省份标签
+  document.querySelectorAll('.province-btn').forEach(b => {
+    b.classList.toggle('selected', b.textContent === province);
+  });
+
+  document.getElementById('provinceNote').innerHTML = '<p><strong>📍 ' + province + '</strong></p><p>' + cfg.note + '</p>';
+
+  if (cfg.contactOnly) {
+    document.getElementById('cityCard').style.display = 'none';
+    document.getElementById('cityIntro').style.display = 'none';
+    showToast('请联系顾问了解当地政策');
+    return;
+  }
+
+  // 渲染城市网格
+  const cityGrid = document.getElementById('cityGrid');
+  cityGrid.innerHTML = '';
+  cfg.cities.forEach(c => {
+    const btn = document.createElement('div');
+    btn.className = 'city-btn' + (c === '东营' || c === '济南' ? ' highlight' : '');
+    btn.textContent = c;
+    btn.onclick = () => selectCity(c);
+    cityGrid.appendChild(btn);
+  });
+
+  document.getElementById('cityCard').style.display = 'block';
+  document.getElementById('cityCardTitle').textContent = province + ' — 选择城市';
+  document.getElementById('cityCardDesc').textContent = '每个城市申报条件不同，选择后加载对应的自检评估项。';
+  document.getElementById('cityIntro').style.display = 'none';
+}
+
+// ================================================================
+// 步骤1：城市选择 → 进入步骤2
 // ================================================================
 function selectCity(city) {
   currentCity = city;
-  // 更新标签样式
+
+  // 更新城市标签
   document.querySelectorAll('.city-btn').forEach(b => {
-    b.classList.toggle('selected', b.textContent.trim() === city);
+    b.classList.toggle('selected', b.textContent === city);
   });
-  const cfg = CITY_CONFIG[city];
-  document.getElementById('checkCityTitle').textContent = city + ' · 申报条件自检';
-  document.getElementById('headerCity').textContent = city;
-  document.getElementById('headerDesc').textContent = '自检完成后测算奖补';
 
-  // 渲染自检项
-  renderCheckItems(cfg.checks);
+  // 获取当前城市的检查项
+  const cityCfg = CITY_CHECKS[city];
+  const provinceCfg = PROVINCES[currentProvince] || {};
+  currentChecks = cityCfg ? cityCfg.checks : baseChecks();
+  const rule = cityCfg ? cityCfg.rule : genericRule(currentProvince, city);
+  const note = cityCfg ? cityCfg.note : (provinceCfg.note || '');
 
-  // 城市政策备注
-  document.getElementById('cityNoteText').textContent = '💡 ' + cfg.note;
-  document.getElementById('cityNoteBox').style.display = 'block';
+  // 保存当前规则和备注
+  window._currentRule = rule;
+  window._currentNote = note;
 
-  // 重置自检状态
+  // 初始化状态：所有必填→pending，选填→pass
   checkAnswers = {};
   checkStatus = {};
+  currentChecks.forEach(item => {
+    checkStatus[item.k] = item.type === 'required' ? 'pending' : 'pass';
+  });
   checkPassed = null;
+
+  // 更新UI
+  document.getElementById('checkTitle').textContent = currentProvince + ' · ' + city + ' · 申报条件自检';
+  document.getElementById('cityNoteText').textContent = '💡 ' + note;
+  document.getElementById('cityNoteBox').style.display = 'block';
+
+  // 渲染自检项
+  renderChecks();
+
+  // 隐藏结果
   document.getElementById('checkResult').classList.add('hidden');
+  document.getElementById('checkPassResult').classList.add('hidden');
+  document.getElementById('checkFailResult').classList.add('hidden');
   document.getElementById('checkSubmitBtn').style.display = 'block';
-  document.getElementById('continueBtn').style.display = 'none';
+
+  document.getElementById('headerTitle').textContent = city + ' · 申报条件自检';
+  document.getElementById('headerDesc').textContent = '确认是否符合当地申报要求';
 
   goToStep2();
 }
@@ -681,75 +718,72 @@ function selectCity(city) {
 // ================================================================
 // 步骤2：自检评估
 // ================================================================
-function renderCheckItems(checks) {
+function renderChecks() {
   const container = document.getElementById('checkList');
   container.innerHTML = '';
-  checks.forEach((item, idx) => {
-    // 条件依赖
-    if (item.cond) {
-      const condAns = checkAnswers[item.cond];
-      if (condAns !== item.condVal) return; // 条件不满足，不渲染
+
+  currentChecks.forEach((item, idx) => {
+    // 条件依赖：只显示满足条件的项
+    if (item.cond !== undefined) {
+      if (checkAnswers[item.cond] !== item.condVal) return;
     }
 
-    const status = checkStatus[item.k] || '';
+    const status = checkStatus[item.k] || 'pending';
+    const answered = checkAnswers[item.k] !== undefined;
     const div = document.createElement('div');
-    div.className = 'check-item' + (status ? ' ' + status : '');
-    div.id = 'check-item-' + idx;
+    div.className = 'check-item ' + status;
+
+    let optHtml = item.opts.map(([text, val]) => {
+      let cls = 'option';
+      if (answered && checkAnswers[item.k] === val) {
+        cls += ' ' + (status === 'pass' ? 'selected-pass' : status === 'fail' ? 'selected-fail' : 'selected-pending');
+      }
+      return '<div class="' + cls + '" onclick="selectCheck(\'' + item.k + '\',' + (val === true ? 'true' : val === false ? 'false' : JSON.stringify(val)) + ',\'' + item.type + '\')">' + text + '</div>';
+    }).join('');
+
     div.innerHTML =
       '<div class="check-label">' +
-        '<span class="check-dot ' + (item.type==='required'?'required':'optional') + '"></span>' +
+        '<span class="check-dot ' + (item.type === 'required' ? 'required' : 'optional') + '"></span>' +
         item.label +
-        '<span class="type-badge ' + (item.type==='required'?'required':'optional') + '">' + (item.type==='required'?'必填':'选填') + '</span>' +
+        '<span class="type-badge ' + (item.type === 'required' ? 'required' : 'optional') + '">' +
+          (item.type === 'required' ? (answered ? (status === 'pass' ? '✓ 已通过' : status === 'fail' ? '✗ 未通过' : '待填写') : '必填') : '选填') +
+        '</span>' +
       '</div>' +
       '<div class="check-tip">' + item.tip + '</div>' +
-      '<div class="check-options">' +
-        item.opts.map(([text, val]) => {
-          const sel = checkAnswers[item.k] === val;
-          let cls = 'option';
-          if (sel) cls += ' ' + status;
-          if (status === 'pass' && sel) cls = 'option pass';
-          if (status === 'fail' && sel) cls = 'option fail';
-          return '<div class="' + cls + '" onclick="selectCheck(\'' + item.k + '\',' + JSON.stringify(val).replace(/"/g,'&quot;') + ',\'' + item.type + '\',' + idx + ')">' + text + '</div>';
-        }).join('') +
-      '</div>';
+      '<div class="check-options">' + optHtml + '</div>';
+
     container.appendChild(div);
   });
 }
 
-function selectCheck(key, value, type, idx) {
+function selectCheck(key, value, type) {
   checkAnswers[key] = value;
-  const item = getCurrentChecks().find(c => c.k === key);
-  if (!item) return;
-
-  // 计算状态
-  let isPass = true;
-  if (type === 'required') {
-    // 通过选项：第一个或value=true的
-    const passVals = item.opts.filter(([t,v]) => v === true || v === 'done');
-    isPass = passVals.length > 0 && passVals.some(([,v]) => v === value);
+  const cfgItem = currentChecks.find(c => c.k === key);
+  if (type === 'required' && cfgItem) {
+    const passOption = cfgItem.opts.find(([,v]) => v === true || v === 'done');
+    checkStatus[key] = (passOption && value === passOption[1]) ? 'pass' : 'fail';
+  } else {
+    checkStatus[key] = 'pass'; // 选填题默认通过
   }
-  checkStatus[key] = isPass ? 'pass' : 'fail';
-
-  // 重新渲染（处理条件依赖）
-  const cfg = CITY_CONFIG[currentCity];
-  renderCheckItems(cfg.checks);
+  renderChecks();
 }
 
-function getCurrentChecks() {
-  return CITY_CONFIG[currentCity] ? CITY_CONFIG[currentCity].checks : [];
-}
-
+// 提交自检
 function submitCheck() {
-  const checks = getCurrentChecks();
   const failReasons = [];
-
-  for (const item of checks) {
-    if (item.cond) {
-      if (checkAnswers[item.cond] !== item.condVal) continue;
+  for (const item of currentChecks) {
+    // 条件依赖：跳过不满足前置条件的项
+    if (item.cond !== undefined) {
+      const condAns = checkAnswers[item.cond];
+      if (condAns === undefined || condAns !== item.condVal) continue;
     }
     if (item.type === 'required') {
-      if (checkStatus[item.k] !== 'pass') {
+      if (checkStatus[item.k] === 'fail') {
+        // 明确选了"否" → 失败原因
         failReasons.push({ label: item.label, tip: item.tip });
+      } else if (checkStatus[item.k] === 'pending') {
+        // 未选任何答案 → 提示补填
+        failReasons.push({ label: item.label, tip: '请点击上方选项确认是否满足该条件' });
       }
     }
   }
@@ -761,35 +795,35 @@ function submitCheck() {
     document.getElementById('checkPassResult').classList.remove('hidden');
     document.getElementById('checkFailResult').classList.add('hidden');
     document.getElementById('checkSubmitBtn').style.display = 'none';
-    document.getElementById('continueBtn').style.display = 'block';
+    document.getElementById('step3Desc').textContent = '✅ 自检已通过 · 填写基础信息完成奖补测算';
   } else {
     document.getElementById('checkPassResult').classList.add('hidden');
     document.getElementById('checkFailResult').classList.remove('hidden');
     document.getElementById('failReasons').innerHTML = failReasons.map(f =>
       '<div class="fail-reason"><div class="fail-reason-title">❌ ' + f.label + '</div><div class="fail-reason-tip">' + f.tip + '</div></div>'
     ).join('');
-    document.getElementById('failNote').textContent = '💡 ' + (CITY_CONFIG[currentCity]||{}).note || '';
+    document.getElementById('failNoteText').textContent = '💡 ' + (window._currentNote || '');
   }
 }
 
 // ================================================================
 // 步骤3：基础信息
 // ================================================================
-function buildOptionBtns(containerId, options, field) {
+function buildFormOpts(containerId, options, field) {
   const container = document.getElementById(containerId);
   container.innerHTML = options.map(([label, val]) =>
-    '<div class="option ' + (form[field]===val?'selected':'') + '" onclick="selectForm(\'' + field + '\',\'' + val.replace(/'/g,"\\'") + '\')">' + label + '</div>'
+    '<div class="option' + (form[field] === val ? ' selected-pending' : '') + '" onclick="selectForm(\'' + field + '\',\'' + val.replace(/'/g,"\\'") + '\')">' + label + '</div>'
   ).join('');
 }
 
 function selectForm(field, value) {
   form[field] = value;
-  const map = { employee:'empOptions', industry:'indOptions', level:'lvlOptions', scene:'sceneOptions' };
-  if (map[field]) buildOptionBtns(map[field], getFormOptions(field), field);
+  const map = { employee:'empOpts', industry:'indOpts', level:'lvlOpts', scene:'sceneOpts' };
+  if (map[field]) buildFormOpts(map[field], getFormOpts(field), field);
   document.getElementById('calcBtn').disabled = !(form.employee && form.industry && form.level && form.scene);
 }
 
-function getFormOptions(field) {
+function getFormOpts(field) {
   if (field === 'employee') return [['1-50人（微型）','1-50'],['51-200人（小型）','51-200'],['201-500人（中型）','201-500'],['500人以上（规上）','500+']];
   if (field === 'industry') return [['机械制造','机械制造'],['食品加工','食品加工'],['化工/石化','化工'],['电子/电气','电子'],['纺织/服装','纺织'],['其他制造业','其他']];
   if (field === 'level') return [['基本为零，全靠手工','无'],['用Excel/ERP，但没打通','基础'],['个别环节已数字化','部分'],['大部分已信息化','较完善']];
@@ -803,16 +837,12 @@ function getFormOptions(field) {
   return [];
 }
 
-// ================================================================
-// 步骤4：测算结果
-// ================================================================
 function doCalc() {
   if (!(form.employee && form.industry && form.level && form.scene)) {
     showToast('请完整填写所有信息'); return;
   }
 
-  const cfg = CITY_CONFIG[currentCity];
-  const rule = cfg.rule;
+  const rule = window._currentRule || genericRule(currentProvince, currentCity);
   const ib = rule.ind[form.industry] || 1.0;
   const lm = rule.lvl[form.level] || 1.0;
   const eb = EMP_BONUS[form.employee] || 0;
@@ -825,40 +855,43 @@ function doCalc() {
   const pct = Math.round((subsidy / sc) * 100);
 
   // 渲染结果
-  document.getElementById('resultCity').textContent = currentCity;
+  document.getElementById('resultCity').textContent = currentProvince + ' · ' + currentCity;
+  document.getElementById('resultSub').textContent = '✅ 自检通过 · 符合申报条件';
   document.getElementById('resultAmount').textContent = subsidy;
-  document.getElementById('tSceneCost').textContent = sc + '万元';
-  document.getElementById('tPercent').textContent = pct + '%';
+  document.getElementById('tCost').textContent = sc + '万元';
+  document.getElementById('tPct').textContent = pct + '%';
   document.getElementById('tSubsidy').textContent = '≈ ' + subsidy + '万元';
   document.getElementById('tCapped').textContent = capped + '万元';
   document.getElementById('tSelfPay').textContent = '≈ ' + selfPay + '万元';
   document.getElementById('resultDate').textContent = new Date().toLocaleDateString('zh-CN');
 
-  // 城市备注
-  if (cfg.note) {
-    document.getElementById('resultCityNoteText').textContent = '📋 ' + cfg.note;
-    document.getElementById('resultCityNote').style.display = 'block';
+  if (window._currentNote) {
+    document.getElementById('resultNoteText').textContent = '📋 ' + window._currentNote;
+    document.getElementById('resultNoteBox').style.display = 'block';
   }
 
   // 个性化建议
   const tips = [];
   if (form.level === '无' || form.level === '基础') tips.push('数字化基础薄弱=改造空间大=奖补优先级高');
-  if (form.scene === '全都要' || form.scene === '全场景（深度）') tips.push('全场景项目奖补额度更高，建议优先考虑');
-  if (currentCity === '东营' && checkAnswers.industry === true) tips.push('东营化工系数全省最高(×1.3)，奖补金额可观');
-  if (currentCity === '威海' && checkAnswers.industry === 'food') tips.push('威海食品行业系数全省最高(×1.5)，出口认证完善是加分项');
+  if (form.scene === '全都要' || form.scene === '全场景（深度）') tips.push('全场景项目奖补额度更高，建议优先考虑全场景');
+  if (tips.length) {
+    document.getElementById('tipsCard').style.display = 'block';
+    document.getElementById('tipsList').innerHTML = tips.map(t => '<div class="tip-item">' + t + '</div>').join('');
+  } else {
+    document.getElementById('tipsCard').style.display = 'none';
+  }
 
-  document.getElementById('tipsCard').style.display = tips.length ? 'block' : 'none';
-  document.getElementById('tipsList').innerHTML = tips.map(t => '<div class="tip-item">💡 ' + t + '</div>').join('');
-
-  // 下一步
   const steps = [
     '联系淘景数科，制定' + currentCity + '专属申报方案',
     '安排免费工厂数字化诊断（45分钟上门）',
-    '准备' + currentCity + '工信局申报材料',
+    '准备' + currentCity + '工信局/经信局申报材料',
   ];
-  document.getElementById('nextStepsList').innerHTML = steps.map((s,i) =>
+  document.getElementById('nextList').innerHTML = steps.map((s,i) =>
     '<div class="next-item"><span class="next-num">' + (i+1) + '</span><span class="next-text">' + s + '</span></div>'
   ).join('');
+
+  document.getElementById('headerTitle').textContent = '奖补测算结果';
+  document.getElementById('headerDesc').textContent = subsidy + '万元预估奖补 · ' + selfPay + '万元自付';
 
   goToStep4();
 }
@@ -867,35 +900,34 @@ function doCalc() {
 // 页面导航
 // ================================================================
 function goToStep1() {
-  ['step1','step2','step3','step4','aboutPage'].forEach(id => document.getElementById(id).classList.add('hidden'));
+  ['step1','step2','step3','step4'].forEach(id => document.getElementById(id).classList.add('hidden'));
   document.getElementById('step1').classList.remove('hidden');
+  document.getElementById('headerTitle').textContent = '🏭 数转奖补自测 v3.0';
+  document.getElementById('headerDesc').textContent = '先选省份城市，再做自检，最后算奖补';
   updateStepBar(1);
-  document.getElementById('appHeader').style.display = 'block';
-  document.getElementById('stepBar').style.display = 'flex';
 }
 
 function goToStep2() {
-  ['step1','step2','step3','step4','aboutPage'].forEach(id => document.getElementById(id).classList.add('hidden'));
+  ['step1','step2','step3','step4'].forEach(id => document.getElementById(id).classList.add('hidden'));
   document.getElementById('step2').classList.remove('hidden');
   updateStepBar(2);
 }
 
 function goToStep3() {
-  // 初始化表单选项
-  buildOptionBtns('empOptions', getFormOptions('employee'), 'employee');
-  buildOptionBtns('indOptions', getFormOptions('industry'), 'industry');
-  buildOptionBtns('lvlOptions', getFormOptions('level'), 'level');
-  buildOptionBtns('sceneOptions', getFormOptions('scene'), 'scene');
-  document.getElementById('step3CityTitle').textContent = currentCity + ' · 基础信息';
+  buildFormOpts('empOpts', getFormOpts('employee'), 'employee');
+  buildFormOpts('indOpts', getFormOpts('industry'), 'industry');
+  buildFormOpts('lvlOpts', getFormOpts('level'), 'level');
+  buildFormOpts('sceneOpts', getFormOpts('scene'), 'scene');
+  document.getElementById('step3Title').textContent = currentProvince + ' · ' + currentCity + ' · 基础信息';
   document.getElementById('calcBtn').disabled = true;
 
-  ['step1','step2','step3','step4','aboutPage'].forEach(id => document.getElementById(id).classList.add('hidden'));
+  ['step1','step2','step3','step4'].forEach(id => document.getElementById(id).classList.add('hidden'));
   document.getElementById('step3').classList.remove('hidden');
   updateStepBar(3);
 }
 
 function goToStep4() {
-  ['step1','step2','step3','step4','aboutPage'].forEach(id => document.getElementById(id).classList.add('hidden'));
+  ['step1','step2','step3','step4'].forEach(id => document.getElementById(id).classList.add('hidden'));
   document.getElementById('step4').classList.remove('hidden');
   updateStepBar(4);
 }
@@ -903,34 +935,28 @@ function goToStep4() {
 function updateStepBar(step) {
   for (let i = 1; i <= 4; i++) {
     const dot = document.getElementById('dot' + i);
-    const line = document.getElementById('line' + (i-1));
+    const line = document.getElementById('line' + (i - 1));
     if (i < step) {
       dot.className = 'step-dot done'; dot.textContent = '✓';
-      if (line) line.classList.add('active');
     } else if (i === step) {
       dot.className = 'step-dot active'; dot.textContent = i;
-      if (line) line.classList.add('active');
     } else {
       dot.className = 'step-dot'; dot.textContent = i;
-      if (line) line.classList.remove('active');
+    }
+    if (line) {
+      line.className = 'step-line' + (i <= step ? ' active' : '');
     }
   }
 }
 
 function resetAll() {
-  currentCity = '';
-  checkAnswers = {};
-  checkStatus = {};
-  checkPassed = null;
-  form = { employee:'', industry:'', level:'', scene:'' };
-  document.querySelectorAll('.city-btn').forEach(b => b.classList.remove('selected'));
+  currentProvince = ''; currentCity = '';
+  currentChecks = []; checkAnswers = {}; checkStatus = {};
+  checkPassed = null; form = { employee:'', industry:'', level:'', scene:'' };
+  document.querySelectorAll('.province-btn,.city-btn').forEach(b => b.classList.remove('selected'));
+  document.getElementById('cityCard').style.display = 'none';
+  document.getElementById('cityIntro').style.display = 'none';
   goToStep1();
-}
-
-function goHome() {
-  ['step1','step2','step3','step4','aboutPage'].forEach(id => document.getElementById(id).classList.add('hidden'));
-  document.getElementById('step1').classList.remove('hidden');
-  updateStepBar(1);
 }
 
 function contactUs() {
@@ -938,12 +964,12 @@ function contactUs() {
 }
 
 function shareResult() {
-  const text = '我在' + currentCity + '做了数转奖补自测，能拿' + document.getElementById('resultAmount').textContent + '万！你也来测测：' + location.href;
+  const text = '我在' + currentProvince + currentCity + '做了数转奖补自测，能拿' + document.getElementById('resultAmount').textContent + '万！快来测测你能拿多少：';
   if (navigator.share) {
-    navigator.share({ title: '数转奖补自测', text: text });
+    navigator.share({ title: '数转奖补自测', text: text + location.href });
   } else {
-    navigator.clipboard && navigator.clipboard.writeText(text).then(() => {
-      showToast('链接已复制，快去分享给同事！');
+    navigator.clipboard && navigator.clipboard.writeText(text + location.href).then(() => {
+      showToast('分享内容已复制，快去粘贴分享！');
     }).catch(() => showToast('请手动复制页面链接分享'));
   }
 }
@@ -953,6 +979,11 @@ function showToast(msg) {
   t.textContent = msg; t.classList.add('show');
   setTimeout(() => t.classList.remove('show'), 2500);
 }
+
+// ================================================================
+// 启动
+// ================================================================
+init();
 </script>
 </body>
 </html>
